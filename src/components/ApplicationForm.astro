@@ -1,0 +1,198 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<form
+  action='http://localhost:3001/application'
+  enctype='multipart/form-data'
+  class='application-form px-6 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'
+  novalidate>
+  <div>
+    <label for='name'>Name:</label>
+    <input type='text' id='name' name='name' required />
+  </div>
+  <div>
+    <label for='email'>Email:</label>
+    <input type='email' id='email' name='email' required />
+  </div>
+  <div>
+    <label for='phone'
+      >Phone Number <span class='font-light tracking-wider opacity-70'
+        >(Format: 555-555-5555):</span
+      >
+    </label>
+    <input type='tel' id='phone' name='phone' required />
+  </div>
+  <div>
+    <label for='position'>Desired Position:</label>
+    <input type='text' id='position' name='position' required />
+  </div>
+  <div>
+    <label for='comments'
+      >Additional Comments <span class='font-light tracking-wider opacity-70'
+        >(Optional):</span
+      ></label
+    >
+    <textarea id='comments' name='comments'></textarea>
+  </div>
+
+  <div class='file-input-container'>
+    <label for='resume' class='file-input-label'>
+      <span class='mb-1'>Please attach a copy of your resume</span>
+      <div class='upload-container'>
+        <span class='btn btn-dark cursor-pointer py-2 mb-1 text-xs w-fit'
+          >Upload Resume</span
+        >
+        <span class='file-name cursor-pointer'></span>
+      </div>
+      <button type='button' class='delete-file-button hidden'
+        ><Icon
+          name='bytesize:trash'
+          class='h-[40px] text-accent-gold-md absolute right-0 -bottom-2 md:bottom-0 p-2'
+        /></button
+      >
+    </label>
+    <input
+      type='file'
+      id='resume'
+      name='resume'
+      accept='.pdf,.doc,.docx'
+      required
+    />
+  </div>
+
+  <div class='form-errors my-4'></div>
+
+  <div>
+    <button
+      type='submit'
+      class='btn btn-light submit-btn bg-accent-blue px-18 self-center mt-14'
+      >Submit Application</button
+    >
+  </div>
+</form>
+
+<style>
+  .application-form {
+    @apply flex flex-col gap-4 max-w-6xl w-full md:w-[90%] lg:w-[80%];
+  }
+
+  .application-form > div {
+    @apply flex flex-col;
+  }
+
+  .application-form label {
+    @apply text-teal-main font-light;
+  }
+
+  .application-form input,
+  .application-form textarea {
+    @apply border border-teal-main border-opacity-50;
+  }
+
+  .application-form input:focus,
+  .application-form textarea:focus {
+    @apply bg-accent-blue bg-opacity-30;
+  }
+
+  .application-form textarea {
+    @apply h-[8rem];
+  }
+
+  /* Hide the default file input */
+  input[type='file'] {
+    display: none;
+  }
+
+  /* Style the custom file input container */
+  .file-input-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .file-input-label {
+    @apply flex flex-col max-w-[90%] items-start cursor-pointer;
+  }
+
+  .upload-container {
+    @apply flex flex-col md:flex-row w-fit justify-start md:items-center gap-x-8 gap-y-4;
+  }
+
+  /* Style the selected file name display */
+  .file-name {
+    @apply text-accent-gold-md;
+  }
+</style>
+
+<script>
+  const deleteBtn = document.querySelector('.delete-file-button')
+  const formErrors = document.querySelector('.form-errors')
+
+  function updateFileName(input) {
+    const fileName = input.files[0].name
+    const fileNameElement = document.querySelector('.file-name')
+    fileNameElement.textContent = fileName
+    deleteBtn.classList.remove('hidden')
+  }
+
+  function deleteFile() {
+    const input = document.getElementById('resume')
+    input.value = '' // Clear the file input value
+    const fileNameElement = input.parentNode.querySelector('.file-name')
+    fileNameElement.textContent = '' // Clear the displayed file name
+    deleteBtn.classList.add('hidden')
+  }
+
+  deleteBtn.addEventListener('click', deleteFile)
+
+  const fileInput = document.getElementById('resume')
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files?.length) {
+      updateFileName(fileInput)
+    } else return
+  })
+
+  // Handle Application Submission
+  const applicationForm = document.querySelector('.application-form')
+  const submitBtn = document.querySelector('.submit-btn')
+
+  applicationForm.addEventListener('submit', e => {
+    e.preventDefault()
+
+    submitBtn.disabled = true
+    submitBtn.textContent = 'Sending...'
+
+    // Send the form data to the server
+    fetch(applicationForm.action, {
+      method: 'POST',
+      body: new FormData(applicationForm),
+    })
+      .then(response => {
+        if (response.ok) {
+          applicationForm.reset()
+          location.assign('/application/success')
+          submitBtn.disabled = false
+          submitBtn.textContent = 'Submit'
+          return
+        } else {
+          submitBtn.disabled = false
+          submitBtn.textContent = 'Submit'
+
+          return response.json()
+        }
+      })
+      .then(data => {
+        const errors = data.map(
+          error => `<p class="text-sm text-red-600">${error.msg}</p>`
+        )
+        const displayedErrors = errors.join('')
+
+        formErrors.innerHTML = displayedErrors
+        console.log(displayedErrors)
+        throw new Error(displayedErrors)
+      })
+      .catch(error => {
+        console.error(error)
+        return
+      })
+  })
+</script>

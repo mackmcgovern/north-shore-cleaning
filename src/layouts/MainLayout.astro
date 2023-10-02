@@ -1,0 +1,41 @@
+---
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import PageHeader from '../components/PageHeader.astro'
+import '../styles/global.css'
+import MobileNavbar from '../components/mobileNavbar.astro'
+
+const {
+  title = 'North Shore Cleaning Services',
+  showHeading = false,
+  description = 'We are proud to provide specialty cleaning services for Duluth, Superior & surrounding areas.',
+  pageHeading,
+} = Astro.props
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500&display=swap'
+      rel='stylesheet'
+    />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class='hidden sm:block'>
+      <Navbar />
+    </div>
+    <div class='block sm:hidden'>
+      <MobileNavbar />
+    </div>
+    {showHeading && <PageHeader pageHeading={pageHeading} />}
+    <slot />
+    <Footer />
+  </body>
+</html>

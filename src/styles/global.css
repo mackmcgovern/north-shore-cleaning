@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;700;&family=Poppins:wght@100;200;300;400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading uppercase tracking-wider;
+  }
+
+  p {
+    @apply text-[#333] leading-[1.7];
+  }
+
+  a {
+    @apply inline-block;
+  }
+
+  input,
+  textarea {
+    @apply font-thin opacity-60 tracking-wide font-sans;
+  }
+
+  input::placeholder {
+    @apply font-sans tracking-wider;
+  }
+  input:focus,
+  textarea:focus {
+    @apply opacity-100;
+  }
+
+  /* extra styles  */
+  .btn {
+    @apply py-4 px-10 uppercase tracking-[0.08em] shadow-sm hover:shadow-md  transition-all ease-in text-[0.8rem] font-[500];
+  }
+
+  .btn-light {
+    @apply bg-accent-blue text-teal-main hover:bg-[#C6E3F0];
+  }
+
+  .btn-dark {
+    @apply bg-teal-main text-white hover:bg-[#2B4C5F];
+  }
+
+  .teal-overlay-dark {
+    @apply bg-[#1E3643] bg-opacity-[88%];
+  }
+
+  .teal-overlay-light {
+    @apply bg-teal-main opacity-[18%];
+  }
+
+  .light-blue-bg {
+    @apply bg-accent-blue bg-opacity-[34%];
+  }
+}

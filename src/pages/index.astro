@@ -1,15 +1,110 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro'
+import ImageSlider from '../components/ImageSlider.astro'
+import { Icon } from 'astro-icon'
+import heroImg from '../assets/table.jpg'
+import { Image } from 'astro:assets'
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout>
+  <section class='relative mt-[100px] md:mt-0'>
+    <div
+      class='absolute bg-teal-main top-0 left-0 right-0 bottom-0 overlay-shape'>
+    </div>
+    <div
+      class='absolute top-0 left-0 right-0 bottom-0 teal-overlay-dark flex items-center'>
+      <div class='absolute top-0 left-0 right-0 bottom-0 container'>
+        <div
+          class='flex flex-col md:flex-row justify-center items-start gap-y-11 gap-x-32 md:justify-between md:items-center -translate-y-14 md:-translate-y-0 container max-w-6xl h-full mx-auto px-10 sm:px-4'>
+          <div>
+            <h1
+              class='uppercase text-5xl sm:text-6xl leading-[loose] text-white mb-4 drop-shadow-md font-[300]'>
+              Cleaning<br /><span class='text-accent-gold font-[400]'
+                >Done Right</span
+              >
+            </h1>
+            <p
+              class='text-white tracking-wider text-lg max-w-[350px] sm:max-w-lg font-[300] drop-shadow-sm'>
+              We are proud to provide specialty cleaning services for Duluth,
+              Superior & surrounding areas.
+            </p>
+          </div>
+          <a href='/contact' class='btn btn-light shrink-0 mt-4 sm:mt-0'
+            >Get a quote</a
+          >
+        </div>
+      </div>
+    </div>
+    <Image
+      src={heroImg}
+      alt=''
+      format='avif'
+      quality={'mid'}
+      class='object-cover h-[88vh]'
+    />
+  </section>
+  <!-- Services Section  -->
+  <section class='py-14 flex flex-col items-center container'>
+    <h2 class='text-teal-main text-[2.3rem] font-[200]'>Services</h2>
+    <div
+      class='flex flex-col sm:flex-row gap-y-12 justify-between items-center w-[90%] max-w-4xl services py-16 sm:py-24'>
+      <div>
+        <Icon name='house' />
+        <p>Hospitality<br /> Cleaning</p>
+      </div>
+      <div>
+        <Icon name='cleaning' />
+        <p>Commercial <br />Cleaning</p>
+      </div>
+      <div>
+        <div>
+          <Icon name='hotel' />
+          <p>Hotel <br />Cleaning</p>
+        </div>
+      </div>
+    </div>
+    <a href='/services' class='btn btn-light'>Learn More</a>
+  </section>
+
+  <section>
+    <h2 class='text-white bg-teal-main text-center text-3xl py-6 font-[200]'>
+      View Our Work
+    </h2>
+    <div>
+      <ImageSlider />
+    </div>
+  </section>
+
+  <section
+    class='flex flex-col gap-4 md:gap-6 justify-center items-center py-14 md:py-16'>
+    <Icon name='stars' class='w-40 md:w-48' />
+    <p
+      class='text-center font-[600] text-teal-main text-lg md:text-xl tracking-wider px-4'>
+      Five star cleanliness rating on Airbnb and Vrbo!
+    </p>
+  </section>
+</MainLayout>
+
+<style>
+  .overlay-shape {
+    clip-path: polygon(0 0, 0% 100%, 42% 0);
+  }
+
+  .services div {
+    @apply flex flex-col items-center gap-5;
+  }
+
+  .services svg {
+    @apply w-[80px];
+  }
+
+  .services p {
+    @apply text-lg font-[500] text-accent-gold text-center leading-tight uppercase;
+  }
+
+  @media screen and (width <= 650px) {
+    .overlay-shape {
+      clip-path: polygon(0 0, 0 68%, 72% 0);
+    }
+  }
+</style>

@@ -1,0 +1,228 @@
+---
+import { Image } from 'astro:assets'
+---
+
+<div class='slider-container'>
+  <div class='slider'></div>
+  <button class='slider-button prev-button'>&#8249;</button>
+  <button class='slider-button next-button'>&#8250;</button>
+</div>
+
+<style>
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slider {
+    display: flex;
+  }
+
+  .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY((calc(50% - 15px)));
+    width: 40px;
+    height: 40px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 20px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .slider-button:hover {
+    opacity: 1;
+  }
+
+  .prev-button {
+    left: 20px;
+  }
+
+  .next-button {
+    right: 20px;
+  }
+</style>
+
+<script>
+  import HomeBath from '../assets/home-bath.jpg'
+  import HomeKitchen from '../assets/home-kitchen.jpg'
+  import ClinicImg from '../assets/clinic.jpg'
+  import CommercialImg from '../assets/commercial-space.jpg'
+  import HotelRoom from '../assets/hotel.jpg'
+  import HotelLobby from '../assets/hotel-lobby.jpg'
+
+  let width = document.documentElement.clientWidth
+
+  window.addEventListener('resize', function () {
+    width = document.documentElement.clientWidth
+    createSlides(width)
+  })
+
+  const desktopSlideData = [
+    {
+      title: 'Hospitality Cleaning',
+      image1: HomeBath,
+      image2: HomeKitchen,
+    },
+    {
+      title: 'Commercial Cleaning',
+      image1: ClinicImg,
+      image2: CommercialImg,
+    },
+    { title: 'Hotel Cleaning', image1: HotelRoom, image2: HotelLobby },
+  ]
+
+  const mobileSlideData = [
+    { title: 'Hospitality Cleaning', image: HomeBath },
+    { title: 'Hospitality Cleaning', image: HomeKitchen },
+    { title: 'Commercial Cleaning', image: ClinicImg },
+    { title: 'Commercial Cleaning', image: CommercialImg },
+    { title: 'Hotel Cleaning', image: HotelRoom },
+    { title: 'Hotel Cleaning', image: HotelLobby },
+  ]
+
+  // Clone first and last image
+  desktopSlideData.push(desktopSlideData[0])
+  desktopSlideData.unshift(desktopSlideData[desktopSlideData.length - 2])
+  // Clone first and last mobile image
+  mobileSlideData.push(mobileSlideData[0])
+  mobileSlideData.unshift(mobileSlideData[mobileSlideData.length - 2])
+
+  let slideData
+
+  slideData = width >= 650 ? desktopSlideData : mobileSlideData
+
+  function getSlidesdata(width) {
+    slideData = width >= 650 ? desktopSlideData : mobileSlideData
+  }
+
+  const slider = document.querySelector('.slider')
+  const sliderContainer = document.querySelector('.slider-container')
+  let isMoving = false
+
+  let slideIndex = 1
+
+  function moveSlides() {
+    slider.style.transform = `translateX(-${slideIndex * 100}%)`
+  }
+
+  function moveHandler(direction) {
+    isMoving = true
+    slider.style.transition = `transform 550ms ease-in-out`
+    direction !== 'right' ? (slideIndex -= 1) : (slideIndex += 1)
+    moveSlides()
+  }
+
+  function createSlides(width) {
+    getSlidesdata(width)
+    let slides
+
+    if (width >= 650) {
+      slides = slideData.map(
+        slide =>
+          `
+    <div class='slide grow shrink-0 basis-full'>
+      <p
+        class='bg-teal-md py-4 text-white text-center tracking-widest text-lg service-title'>
+      ${slide.title}
+      </p>
+      <div class='relative'>
+        <div class='absolute top-0 left-0 w-full h-full bg-teal-md bg-opacity-20'>
+      </div>
+        <div class='slider-images relative'>
+          <div class='group'>
+            <div class='flex'>
+              <Image src=${slide.image1.src} alt='' class='image-1 w-1/2 object-cover aspect-[4/2.5]' />
+              <Image src=${slide.image2.src} alt='' class='image-2 w-1/2 object-cover aspect-[4/2.5]' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+      )
+    } else {
+      slides = slideData.map(
+        slide =>
+          `
+    <div class='slide grow shrink-0 basis-full'>
+      <p
+        class='bg-teal-md py-4 text-white text-center tracking-widest text-lg service-title'>
+      ${slide.title}
+      </p>
+      <div class='relative'>
+        <div class='absolute top-0 left-0 w-full h-full bg-teal-md bg-opacity-20'>
+      </div>
+        <div class='slider-images relative'>
+          <div class='group'>
+            <div class='flex'>
+              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.5]' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+      )
+    }
+
+    slider.innerHTML = slides.join('')
+
+    moveSlides()
+  }
+
+  // handle right click
+  document.querySelector('.next-button').addEventListener('click', function () {
+    if (isMoving === false) {
+      moveHandler('right')
+    }
+  })
+
+  // handle left click
+  document.querySelector('.prev-button').addEventListener('click', function () {
+    if (isMoving === false) {
+      moveHandler('')
+    }
+  })
+
+  slider.addEventListener('transitionend', () => {
+    isMoving = false
+    if (slideIndex === 0) {
+      slider.style.transition = `none`
+      slideIndex = slideData.length - 2
+      moveSlides()
+    } else if (slideIndex === slideData.length - 1) {
+      slider.style.transition = `none`
+      slideIndex = 1
+      moveSlides()
+    }
+  })
+
+  createSlides(width)
+
+  // Automate slider
+  let timer
+
+  function startSlider() {
+    timer = setInterval(() => {
+      moveHandler('right')
+    }, 4000) // Auto change every 4 seconds
+  }
+
+  function stopSlider() {
+    clearInterval(timer)
+  }
+
+  startSlider()
+
+  sliderContainer.addEventListener('mouseenter', () => {
+    stopSlider()
+  })
+  sliderContainer.addEventListener('mouseleave', () => {
+    startSlider()
+  })
+</script>

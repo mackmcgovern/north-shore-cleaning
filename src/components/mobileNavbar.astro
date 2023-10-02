@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon'
+import Logo from './Logo.astro'
+---
+
+<nav
+  class='container flex items-center justify-center w-full fixed top-0 z-20 bg-white shadow-sm'>
+  <div>
+    <a
+      href='/'
+      class='py-4 flex flex-col items-center text-center tracking-[0.2em] leading-[18px] font-[500] font-heading text-base text-teal-main'>
+      <div class='w-[200px]'>
+        <Logo />
+      </div>
+    </a>
+
+    <div class='hamburger'>
+      <div class='bar1'></div>
+      <div class='bar2'></div>
+      <div class='bar3'></div>
+    </div>
+  </div>
+</nav>
+<nav>
+  <ul class='flex flex-col justify-center items-center navLinks z-10'>
+    <li><a href='/' class='nav-link'>Home</a></li>
+    <li><a href='/services' class='nav-link'>Services</a></li>
+    <li><a href='/about' class='nav-link'>About</a></li>
+    <li><a href='/contact' class='nav-link'>Contact</a></li>
+    <li><a href='/apply' class='nav-link'>Apply</a></li>
+  </ul>
+</nav>
+
+<style>
+  .navLinks {
+    @apply uppercase text-teal-main font-light tracking-wider text-base mx-auto h-[100vh] w-[130px] bg-white bg-opacity-95 shadow-md fixed top-0 right-[-130px];
+  }
+
+  .navLinks .nav-link {
+    @apply hover:text-accent-gold-md transition-colors ease-in inline-block py-6 px-2;
+  }
+
+  .navLinks.open {
+    transform: translateX(-130px);
+    transition: all 0.5s;
+  }
+
+  .hamburger {
+    @apply h-12 w-12 flex flex-col gap-2 items-center justify-center absolute top-1/2 -translate-y-1/2 right-4 z-20 cursor-pointer;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    @apply bg-teal-md h-[2px] w-9;
+  }
+
+  .animateBar1 {
+    animation: rotateBar1 0.5s;
+    animation-fill-mode: forwards;
+  }
+  .animateBar2 {
+    animation: fadeBar2 0.5s;
+    animation-fill-mode: forwards;
+  }
+  .animateBar3 {
+    animation: rotateBar3 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeBar2 {
+    from {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    to {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+  }
+  @keyframes rotateBar1 {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(45deg) translate(4px, 10px);
+    }
+  }
+  @keyframes rotateBar3 {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(-45deg) translate(4px, -10px);
+    }
+  }
+</style>
+
+<script>
+  const hamburger = document.querySelector('.hamburger')
+  const bar1 = document.querySelector('.bar1')
+  const bar2 = document.querySelector('.bar2')
+  const bar3 = document.querySelector('.bar3')
+  const navLinks = document.querySelector('.navLinks')
+
+  hamburger.addEventListener('click', () => {
+    bar1.classList.toggle('animateBar1')
+    bar2.classList.toggle('animateBar2')
+    bar3.classList.toggle('animateBar3')
+    navLinks.classList.toggle('open')
+  })
+</script>
