@@ -7,6 +7,14 @@
   html {
     @apply font-sans;
   }
+  body {
+    @apply flex flex-col min-h-screen;
+  }
+
+  footer {
+    @apply mt-auto;
+  }
+
   h1,
   h2,
   h3,
@@ -24,11 +32,11 @@
 
   input,
   textarea {
-    @apply font-thin opacity-60 tracking-wide font-sans;
+    @apply font-thin opacity-80 tracking-wide font-sans;
   }
 
   input::placeholder {
-    @apply font-sans tracking-wider;
+    @apply font-sans tracking-wide;
   }
   input:focus,
   textarea:focus {
