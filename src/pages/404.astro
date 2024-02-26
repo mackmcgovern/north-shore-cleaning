@@ -1,0 +1,25 @@
+---
+import MainLayout from '../layouts/MainLayout.astro'
+---
+
+<MainLayout>
+  <div class='not-found'>
+    <h1>
+      <span>404</span><br />Page not found
+    </h1>
+  </div>
+</MainLayout>
+
+<style>
+  .not-found {
+    @apply flex justify-center items-center min-h-[60vh];
+  }
+
+  .not-found h1 {
+    @apply text-[2.5rem] leading-[1] text-center text-teal-main;
+  }
+
+  .not-found h1 > span {
+    @apply text-[9rem] font-semibold;
+  }
+</style>
