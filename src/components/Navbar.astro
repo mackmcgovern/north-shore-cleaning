@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon'
 import Logo from './Logo.astro'
 
 const currentPath = new URL(Astro.request.url).pathname.slice(1)
+console.log(currentPath)
 ---
 
 <nav class='container border-b border-teal-main border-opacity-20'>
