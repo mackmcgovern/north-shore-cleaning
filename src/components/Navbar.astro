@@ -1,31 +1,60 @@
 ---
 import { Icon } from 'astro-icon'
 import Logo from './Logo.astro'
+
+const currentPath = new URL(Astro.request.url).pathname.slice(1)
 ---
 
 <nav class='container border-b border-teal-main border-opacity-20'>
   <ul
     class='flex justify-between items-center nav-links md:px-4 max-w-7xl mx-auto py-2'>
-    <li><a href='/services' class='nav-link'>Services</a></li>
-    <li><a href='/about' class='nav-link'>About</a></li>
+    <li>
+      <a
+        href='/services'
+        class={currentPath === 'services' ? 'nav-link active' : 'nav-link'}
+        >Services</a
+      >
+    </li>
+    <li>
+      <a
+        href='/about'
+        class={currentPath === 'about' ? 'nav-link active' : 'nav-link'}
+        >About</a
+      >
+    </li>
     <li>
       <a href='/' class='py-4 flex flex-col items-center text-center'>
         <div class='w-[250px]'>
           <Logo />
         </div>
-        <li><a href='/contact' class='nav-link'>Contact</a></li>
-        <li><a href='/apply' class='nav-link'>Apply</a></li>
       </a>
     </li>
-
-    <style>
-      .nav-links {
-        @apply uppercase text-teal-main font-light tracking-wider text-base;
-      }
-
-      .nav-links .nav-link {
-        @apply hover:text-accent-gold-md transition-colors ease-in inline-block pt-10 pb-6 px-2;
-      }
-    </style>
+    <li>
+      <a
+        href='/contact'
+        class={currentPath === 'contact' ? 'nav-link active' : 'nav-link'}
+        >Contact</a
+      >
+    </li>
+    <li>
+      <a
+        href='/apply'
+        class={currentPath === 'apply' ? 'nav-link active' : 'nav-link'}
+        >Apply</a
+      >
+    </li>
   </ul>
 </nav>
+
+<style>
+  .nav-links {
+    @apply uppercase text-teal-main font-light tracking-wider text-base;
+  }
+
+  .nav-links .nav-link {
+    @apply hover:text-accent-gold-md transition-colors ease-in inline-block pt-10 pb-6 px-2;
+  }
+  .nav-link.active {
+    @apply text-accent-gold-md;
+  }
+</style>
