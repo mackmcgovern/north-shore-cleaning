@@ -27,7 +27,8 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
   <ul class='flex flex-col justify-center items-center navLinks z-10'>
     <li>
       <a href='/' class={currentPath === '' ? 'nav-link active' : 'nav-link'}
-        >Home</a>
+        >Home</a
+      >
     </li>
     <li>
       <a
@@ -85,7 +86,7 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
   .bar1,
   .bar2,
   .bar3 {
-    @apply bg-teal-md h-[2px] w-9;
+    @apply bg-teal-main h-[2px] w-8 opacity-90;
   }
 
   .animateBar1 {

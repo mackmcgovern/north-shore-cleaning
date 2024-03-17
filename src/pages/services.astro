@@ -1,6 +1,5 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro'
-
 import { Image } from 'astro:assets'
 import HomeOffice from '../assets/home-office.jpg'
 import LobbyImg from '../assets/lobby.jpg'
@@ -16,24 +15,24 @@ import HotelRoom from '../assets/hotel.jpg'
         <div class='desc'>
           <h2>Hospitality Cleaning</h2>
           <p>
-            A description of the service. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Unde, esse? Culpa distinctio sequi suscipit
-            ratione blanditiis? Aliquid sed dolores illo nobis voluptatem, enim
-            quas quae officiis commodi reiciendis odit. Esse, dicta doloribus.
+            We ensure that every guest is welcomed into a clean and safe
+            environment when checking into your vacation rental. What we provide
+            for our hospitality cleaning service include but are not limited to:
+            Same day turnovers, seasonal deep cleans, and exceptional, quality
+            cleaning after each guest, every time. We use a convenient automated
+            scheduling service that is compatible with Airbnb, VRBO, and Evolve.
           </p>
         </div>
       </div>
 
       <div class='service-item'>
-        <Image src={LobbyImg} alt='' class='order-1 md:order-2' />
-        <div class='desc order-2 md:order-1'>
+        <Image src={LobbyImg} alt='' class='order-1 lg:order-2' />
+        <div class='desc order-2 lg:order-1'>
           <h2>Commercial Cleaning</h2>
           <p>
-            A description of the service. Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Amet ab eveniet optio officiis sunt
-            sapiente, culpa rerum veritatis, sint perferendis asperiores autem
-            non. Repudiandae, laudantium quaerat iusto, ab magni tempore atque
-            quas.
+            Our trained cleaners understand the importance of a clean workspace.
+            We offer commercial cleaning in multiple different work environments
+            such as; Office buildings, classrooms, medical facilities, and more.
           </p>
         </div>
       </div>
@@ -41,14 +40,8 @@ import HotelRoom from '../assets/hotel.jpg'
       <div class='service-item'>
         <Image src={HotelRoom} alt='' />
         <div class='desc'>
-          <h2>Hotel Cleaning</h2>
-          <p>
-            A description of the service. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Aliquid eaque ducimus quis qui dolores, veniam
-            reprehenderit, labore id laborum ea quos quo quia repellendus?
-            Aperiam iste deleniti amet ratione, praesentium fugiat consequatur
-            eligendi.
-          </p>
+          <h2>Temp Cleaning</h2>
+          <p>COMING SOON</p>
         </div>
       </div>
     </div>
@@ -68,14 +61,14 @@ import HotelRoom from '../assets/hotel.jpg'
   }
 
   .service-item {
-    @apply flex flex-col md:flex-row gap-y-6 w-full py-6 md:py-0 justify-between items-center;
+    @apply flex flex-col lg:flex-row gap-y-6 w-full py-6 lg:py-0 justify-between items-center;
   }
   img {
-    @apply w-[95%] md:w-1/2;
+    @apply w-[95%] lg:w-1/2;
   }
 
   .desc {
-    @apply w-[95%] mr-auto md:w-1/2 px-4 md:px-4 lg:px-8 xl:px-14 mt-2 md:mt-0;
+    @apply w-[95%] mr-auto lg:w-1/2 px-4 md:px-4 lg:px-8 xl:px-14 mt-2 md:mt-0;
   }
 
   .desc p {
