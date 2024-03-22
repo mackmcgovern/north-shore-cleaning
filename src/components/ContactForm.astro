@@ -13,18 +13,8 @@
     <input type='email' id='email' name='email' required />
   </div>
   <div>
-    <label for='phone'
-      >Phone Number <span class='font-light tracking-wider opacity-70'
-        >(Format: 555-555-5555):</span
-      ></label
-    >
-    <input
-      type='tel'
-      id='phone'
-      name='phone'
-      pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-      required
-    />
+    <label for='phone'>Phone Number:</label>
+    <input type='tel' id='phone' name='phone' required />
   </div>
   <div>
     <label for='subject'>Subject:</label>
@@ -101,8 +91,9 @@
       message: message.value,
     }
 
+    const url = import.meta.env.PUBLIC_CONTACT
     // Send the form data to the server
-    fetch('http://localhost:3001/contact', {
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

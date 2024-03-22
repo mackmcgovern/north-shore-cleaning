@@ -3,7 +3,6 @@ import { Icon } from 'astro-icon'
 ---
 
 <form
-  action='http://localhost:3001/application'
   enctype='multipart/form-data'
   class='application-form px-6 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'
   novalidate>
@@ -16,11 +15,7 @@ import { Icon } from 'astro-icon'
     <input type='email' id='email' name='email' required />
   </div>
   <div>
-    <label for='phone'
-      >Phone Number <span class='font-light tracking-wider opacity-70'
-        >(Format: 555-555-5555):</span
-      >
-    </label>
+    <label for='phone'>Phone Number:</label>
     <input type='tel' id='phone' name='phone' required />
   </div>
   <div>
@@ -161,8 +156,9 @@ import { Icon } from 'astro-icon'
     submitBtn.disabled = true
     submitBtn.textContent = 'Sending...'
 
+    const applyUrl = import.meta.env.PUBLIC_APPLY
     // Send the form data to the server
-    fetch(applicationForm.action, {
+    fetch(applyUrl, {
       method: 'POST',
       body: new FormData(applicationForm),
     })
