@@ -7,7 +7,7 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
 
 <nav class='container border-b border-teal-main border-opacity-20'>
   <ul
-    class='flex justify-between items-center nav-links md:px-4 max-w-7xl mx-auto py-2'>
+    class='flex justify-between items-center nav-links md:px-4 max-w-3xl mx-auto py-2'>
     <li>
       <a
         href='/services'
@@ -15,13 +15,7 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
         >Services</a
       >
     </li>
-    <li>
-      <a
-        href='/about'
-        class={currentPath === 'about' ? 'nav-link active' : 'nav-link'}
-        >About</a
-      >
-    </li>
+
     <li>
       <a href='/' class='py-4 flex flex-col items-center text-center'>
         <div class='w-[250px]'>
@@ -36,13 +30,7 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
         >Contact</a
       >
     </li>
-    <li>
-      <a
-        href='/apply'
-        class={currentPath === 'apply' ? 'nav-link active' : 'nav-link'}
-        >Apply</a
-      >
-    </li>
+
   </ul>
 </nav>
 

@@ -100,8 +100,10 @@ import { Image } from 'astro:assets'
     slideData = width >= 650 ? desktopSlideData : mobileSlideData
   }
 
-  const slider = document.querySelector('.slider')
-  const sliderContainer = document.querySelector('.slider-container')
+  const slider = document.querySelector('.slider') as HTMLDivElement
+  const sliderContainer = document.querySelector('.slider-container') as HTMLDivElement
+  const nextBtn =   document.querySelector('.next-button') as HTMLButtonElement
+  const prevBtn =   document.querySelector('.prev-button') as HTMLButtonElement
   let isMoving = false
 
   let slideIndex = 1
@@ -176,14 +178,14 @@ import { Image } from 'astro:assets'
   }
 
   // handle right click
-  document.querySelector('.next-button').addEventListener('click', function () {
+  nextBtn.addEventListener('click', function () {
     if (isMoving === false) {
       moveHandler('right')
     }
   })
 
   // handle left click
-  document.querySelector('.prev-button').addEventListener('click', function () {
+  prevBtn.addEventListener('click', function () {
     if (isMoving === false) {
       moveHandler('')
     }
@@ -219,12 +221,15 @@ import { Image } from 'astro:assets'
 
   startSlider()
 
-  sliderContainer.addEventListener('mouseenter', () => {
+  const sliderBtns = [nextBtn, prevBtn]
+
+  sliderBtns.forEach(btn => btn.addEventListener('mouseenter', () => {
     stopSlider()
-  })
-  sliderContainer.addEventListener('mouseleave', () => {
+  }))
+
+  sliderBtns.forEach(btn => btn.addEventListener('mouseleave', () => {
     startSlider()
-  })
+  }))
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
