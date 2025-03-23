@@ -48,12 +48,18 @@ import { Image } from 'astro:assets'
 </style>
 
 <script>
-  import HomeBath from '../assets/home-bath.jpg'
-  import HomeKitchen from '../assets/home-kitchen.jpg'
-  import ClinicImg from '../assets/clinic.jpg'
-  import CommercialImg from '../assets/commercial-space.jpg'
+  // hospitality 
+  import Cabin from '../assets/hospitality-cabin.jpg'
+  import Bed from '../assets/hospitality-bed.jpg'
+  // commercial 
+  import Clinic from '../assets/commercial-clinic.jpg'
+  import Lobby from '../assets/commercial-lobby.jpg'
+  import Office from '../assets/commercial-office.jpg'
+
+  // import Office from '../assets/commercial-space.jpg'
+
+  // REPLACE
   import HotelRoom from '../assets/hotel.jpg'
-  import HotelLobby from '../assets/hotel-lobby.jpg'
 
   let width = document.documentElement.clientWidth
 
@@ -65,24 +71,24 @@ import { Image } from 'astro:assets'
   const desktopSlideData = [
     {
       title: 'Hospitality Cleaning',
-      image1: HomeBath,
-      image2: HomeKitchen,
+      image1: Cabin,
+      image2: Bed,
     },
     {
       title: 'Commercial Cleaning',
-      image1: ClinicImg,
-      image2: CommercialImg,
+      image1: Clinic,
+      image2: Office,
     },
-    { title: 'Hotel Cleaning', image1: HotelRoom, image2: HotelLobby },
+    { title: 'Commercial Cleaning', image1: HotelRoom, image2: Lobby },
   ]
 
   const mobileSlideData = [
-    { title: 'Hospitality Cleaning', image: HomeBath },
-    { title: 'Hospitality Cleaning', image: HomeKitchen },
-    { title: 'Commercial Cleaning', image: ClinicImg },
-    { title: 'Commercial Cleaning', image: CommercialImg },
-    { title: 'Hotel Cleaning', image: HotelRoom },
-    { title: 'Hotel Cleaning', image: HotelLobby },
+    { title: 'Hospitality Cleaning', image: Cabin },
+    { title: 'Hospitality Cleaning', image: Bed },
+    { title: 'Commercial Cleaning', image: Clinic },
+    { title: 'Commercial Cleaning', image: Office },
+    { title: 'Commercial Cleaning', image: HotelRoom },
+    { title: 'Commercial Cleaning', image: Lobby },
   ]
 
   // Clone first and last image
