@@ -68,14 +68,21 @@
 </style>
 
 <script>
-  const contactForm = document.querySelector('.contact-form')
-  let name = document.getElementById('name')
-  let email = document.getElementById('email')
-  let phone = document.getElementById('phone')
-  let subject = document.getElementById('subject')
-  let message = document.getElementById('message')
-  const submitBtn = document.querySelector('.submit-btn')
-  const formErrors = document.querySelector('.form-errors')
+  import { validateEmail } from '../../src/utils/validateEmail'
+  import { validateInput } from '../../src/utils/validateInput'
+  import { validateName } from '../../src/utils/validateName'
+
+
+  const contactForm = document.querySelector('.contact-form') as HTMLFormElement
+
+  // let name = document.getElementById('name')
+  // let email = document.getElementById('email')
+  // let phone = document.getElementById('phone')
+  // let subject = document.getElementById('subject')
+  // let message = document.getElementById('message')
+
+  const submitBtn = document.querySelector('.submit-btn') as HTMLButtonElement
+  const formErrors = document.querySelector('.form-errors') as HTMLDivElement
 
   contactForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -83,47 +90,94 @@
     submitBtn.disabled = true
     submitBtn.textContent = 'Sending...'
 
-    let formData = {
-      name: name.value,
-      email: email.value,
-      phone: phone.value,
-      subject: subject.value,
-      message: message.value,
+    // let ffrmData = {
+    //   name: name.value,
+    //   email: email.value,
+    //   phone: phone.value,
+    //   subject: subject.value,
+    //   message: message.value,
+    // }
+
+
+    contactForm.addEventListener('submit', async function(event) {
+      event.preventDefault()
+
+    let formData = new FormData(this)
+
+    // Create an object to hold the trimmed data
+    const data: { [key: string]: any } = {}
+
+    formData.forEach((value, key) => {
+      if (typeof value === 'string') {
+        data[key] = value.trim()
+      } else {
+        data[key] = value
+      }
+    })
+
+    const trimmedData = {
+      name: data['name'],
+      email: data['email'],
+      subject: data['subject'],
+      message: data['message'],
     }
 
-    const url = import.meta.env.PUBLIC_CONTACT
-    // Send the form data to the server
-    fetch(url, {
+
+    // Validate the form data
+    if(!validateName(trimmedData.name)) {
+      formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid name</p>'
+      // submitBtn.disabled = false
+      // submitBtn.textContent = 'Submit'
+      return
+    }
+
+      if(!validateEmail(trimmedData.email)) {
+        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid email</p>'
+        // submitBtn.disabled = false
+        // submitBtn.textContent = 'Submit'
+        return
+      }
+
+      if(!validateInput(trimmedData.subject)) {
+        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid subject</p>'
+        // submitBtn.disabled = false
+        // submitBtn.textContent = 'Submit'
+        return
+      }
+
+      if(!validateInput(trimmedData.message)) {
+        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid message</p>'
+        // submitBtn.disabled = false
+        // submitBtn.textContent = 'Submit'
+        return
+      }
+
+
+      // send data to netlify function 
+
+    const response = await fetch('/netlify/functions/contact-form', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(trimmedData),
     })
-      .then(response => {
-        if (response.ok) {
-          contactForm.reset()
-          location.assign('/contact/success')
-          return
-        } else {
-          submitBtn.disabled = false
-          submitBtn.textContent = 'Submit'
+    const result = await response.json()
 
-          return response.json()
-        }
-      })
-      .then(data => {
-        const errors = data.map(
-          error => `<p class="text-sm text-red-600">${error.msg}</p>`
-        )
-        const displayedErrors = errors.join('')
-
-        formErrors.innerHTML = displayedErrors
-        console.log(displayedErrors)
-        throw new Error(displayedErrors)
-      })
-      .catch(error => {
-        console.error(error)
-      })
+    if (response.ok) {
+      // setLoadingState(false, 'success')
+      contactForm.reset()
+    } else {
+      // message.classList.add('error')
+      // message.textContent = result.message
+      // setLoadingState(false, 'error')
+    }
   })
+
+
+// ENND Of FUNCTion
+  })
+    
+
+  
 </script>

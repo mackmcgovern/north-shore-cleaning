@@ -120,7 +120,7 @@ import { Image } from 'astro:assets'
 
   function moveHandler(direction) {
     isMoving = true
-    slider.style.transition = `transform 350ms ease-in`
+    slider.style.transition = `transform 500ms ease-in`
     direction !== 'right' ? (slideIndex -= 1) : (slideIndex += 1)
     moveSlides()
   }
