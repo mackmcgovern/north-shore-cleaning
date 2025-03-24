@@ -3,37 +3,37 @@
 ---
 
 <form
-  class='contact-form px-4 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5' id="contact-form">
-  <div class="form-item name">
+  class='contact-form px-4 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'
+  id='contact-form'>
+  <div class='form-item name'>
     <label for='name'>Name:</label>
-    <input type='text' id='name' name='name' required/>
+    <input type='text' id='name' name='name' required />
   </div>
-  <div class="form-item email">
+  <div class='form-item email'>
     <label for='email'>Email:</label>
     <input type='email' id='email' name='email' required />
   </div>
-  <div class="form-item phone">
+  <div class='form-item phone'>
     <label for='phone'>Phone Number:</label>
     <input type='tel' id='phone' name='phone' required />
   </div>
-  <div class="form-item subject">
+  <div class='form-item subject'>
     <label for='subject'>Subject:</label>
     <input type='text' id='subject' name='subject' required />
   </div>
-  <div class="form-item message">
+  <div class='form-item message'>
     <label for='message'>Message:</label>
     <textarea id='message' name='message' required></textarea>
   </div>
   <div class='errors my-4'>
-    <p class="form-errors text-sm text-red-700"></p>
+    <p class='form-errors text-sm text-red-700'></p>
   </div>
 
-    <button
-      type='submit'
-      class='btn btn-light bg-accent-blue self-center mt-6 w-[15rem] text-center submit-btn'
-      >Submit</button
-    >
-  </div>
+  <button
+    type='submit'
+    class='btn btn-light bg-accent-blue self-center mt-6 w-[15rem] text-center submit-btn'
+    >Submit</button
+  >
 </form>
 
 <style>
@@ -51,7 +51,7 @@
 
   .contact-form input,
   .contact-form textarea {
-    @apply border border-teal-main border-opacity-50 text-teal-main;
+    @apply border border-teal-main border-opacity-50 text-teal-main font-normal;
   }
 
   .contact-form input:focus,
@@ -67,13 +67,13 @@
     @apply opacity-50 cursor-default hover:shadow-none;
   }
 
-.error input {
-  @apply border-red-700
-}
+  .error input {
+    @apply border-red-700;
+  }
 
-.error label {
-  @apply text-red-700
-}
+  .error label {
+    @apply text-red-700;
+  }
 </style>
 
 <script>
@@ -93,7 +93,7 @@
   let errorsArray: string[] = []
   let errorMessage: string[] = []
 
- const setLoadingState = function(isLoading: boolean) {
+  const setLoadingState = function (isLoading: boolean) {
     if (isLoading) {
       submitBtn.disabled = true
       submitBtn.textContent = 'Sending...'
@@ -102,18 +102,16 @@
       submitBtn.textContent = 'Submit'
     }
   }
-  
 
-  contactForm.addEventListener('submit', async function(e) {
+  contactForm.addEventListener('submit', async function (e) {
     e.preventDefault()
     setLoadingState(true)
     isValid = true
     errorsArray = []
     errorMessage = []
-  
 
     let formData = new FormData(this)
-    
+
     // Create an object to hold the trimmed data
     const data: { [key: string]: any } = {}
 
@@ -131,10 +129,10 @@
       phone: data['phone'],
       subject: data['subject'],
       message: data['message'],
-    }    
+    }
 
     // Validate the form data
-    if(!validateName(trimmedData.name)) {
+    if (!validateName(trimmedData.name)) {
       // formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid name</p>'
       isValid = false
       errorsArray.push('name')
@@ -145,7 +143,7 @@
       }
     }
 
-    if(!validateEmail(trimmedData.email)) {
+    if (!validateEmail(trimmedData.email)) {
       isValid = false
       errorsArray.push('email')
       if (trimmedData.email === '') {
@@ -155,7 +153,7 @@
       }
     }
 
-    if(!validatePhone(trimmedData.phone)) {
+    if (!validatePhone(trimmedData.phone)) {
       isValid = false
       errorsArray.push('phone')
       if (trimmedData.phone === '') {
@@ -165,7 +163,7 @@
       }
     }
 
-    if(!validateInput(trimmedData.subject)) {
+    if (!validateInput(trimmedData.subject)) {
       isValid = false
       errorsArray.push('subject')
       if (trimmedData.subject === '') {
@@ -175,7 +173,7 @@
       }
     }
 
-    if(!validateInput(trimmedData.message)) {
+    if (!validateInput(trimmedData.message)) {
       isValid = false
       errorsArray.push('message')
       if (trimmedData.message === '') {
@@ -185,8 +183,8 @@
       }
     }
 
-    console.log(isValid, errorsArray, errorMessage);
-    
+    console.log(isValid, errorsArray, errorMessage)
+
     formItems.forEach(item => {
       item.classList.remove('error')
 
@@ -203,8 +201,7 @@
       return
     }
 
-
-    // send data to netlify function 
+    // send data to netlify function
     const response = await fetch('/netlify/functions/contact-form', {
       method: 'POST',
       headers: {
@@ -213,7 +210,7 @@
       body: JSON.stringify(trimmedData),
     })
     const result = await response.json()
-    console.log(result);
+    console.log(result)
 
     if (response.ok) {
       setLoadingState(false)
@@ -224,10 +221,4 @@
       setLoadingState(false)
     }
   })
-
-
-
-    
-
-  
 </script>
