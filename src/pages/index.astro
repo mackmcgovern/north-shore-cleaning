@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro'
 import ImageSlider from '../components/ImageSlider.astro'
+import ImageSlider2 from '../components/ImageSlider2.astro'
 import { Icon } from 'astro-icon'
 import heroImg from '../assets/hero-2.jpg'
 import { Image } from 'astro:assets'
@@ -67,11 +68,11 @@ import { Image } from 'astro:assets'
     <a href='/services' class='btn btn-light'>Learn More</a>
   </section>
   <!-- ABOUT  -->
-  <section class='py-14  bg-[#f2f2f2]'>
-    <h2 class='text-teal-main text-[2.3rem] font-[300] text-center'>About Us</h2>
+  <section class='py-14  bg-teal-main bg-opacity-90'>
+    <h2 class='text-white text-[2.3rem] font-[200] text-center'>About Us</h2>
     <div
-      class=' w-[90%] max-w-4xl  py-6 sm:py-6 container'>
-      <p class="text-teal-main sm:text-center leading-8">
+      class=' w-[90%] max-w-[57rem]  py-6 sm:py-6 container'>
+      <p class="text-white sm:text-center leading-8 font-[300]">
         April Schultz is the owner and President of North Shore Cleaning
         Services, Inc. She got her start in the cleaning industry when she was
         17 years old, working as a housekeeper for the historic Lutsen Lodge
@@ -85,12 +86,16 @@ import { Image } from 'astro:assets'
     </div>
   </section>
 <!-- VIEW OUR WORK  -->
-  <section>
-    <h2 class='text-white bg-teal-main text-center text-3xl py-6 font-[300]'>
+  <section class="py-6 bg-[#f2f2f2]">
+    <h2 class='text-teal-md text-center text-3xl py-6 font-[300]'>
       View Our Work
     </h2>
+    <!-- <h2 class='text-white bg-teal-main text-center text-3xl py-6 font-[300]'>
+      View Our Work
+    </h2> -->
     <div>
-      <ImageSlider />
+      <!-- <ImageSlider /> -->
+      <ImageSlider2 />
     </div>
   </section>
   <!-- RATING  -->
@@ -98,10 +103,18 @@ import { Image } from 'astro:assets'
     class='flex flex-col gap-4 md:gap-6 justify-center items-center py-14 md:py-16'>
     <Icon name='stars' class='w-40 md:w-48' />
     <p
-      class='text-center font-[600] text-teal-main text-lg md:text-xl tracking-wider px-4'>
+      class='text-center font-[600] text-teal-md text-lg md:text-xl tracking-wider px-4'>
       Five star cleanliness rating on Airbnb and Vrbo!
     </p>
   </section>
+  <!-- <section
+    class='flex flex-col gap-4 md:gap-6 justify-center items-center py-14 md:py-16'>
+    <Icon name='stars' class='w-40 md:w-48' />
+    <p
+      class='text-center font-[600] text-teal-main text-lg md:text-xl tracking-wider px-4'>
+      Five star cleanliness rating on Airbnb and Vrbo!
+    </p>
+  </section> -->
 </MainLayout>
 
 <style>

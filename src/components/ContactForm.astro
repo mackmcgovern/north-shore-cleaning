@@ -3,29 +3,30 @@
 ---
 
 <form
-  class='contact-form px-4 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'>
-  <div>
+  class='contact-form px-4 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5' id="contact-form">
+  <div class="form-item name">
     <label for='name'>Name:</label>
-    <input type='text' id='name' name='name' required />
+    <input type='text' id='name' name='name' required/>
   </div>
-  <div>
+  <div class="form-item email">
     <label for='email'>Email:</label>
     <input type='email' id='email' name='email' required />
   </div>
-  <div>
+  <div class="form-item phone">
     <label for='phone'>Phone Number:</label>
     <input type='tel' id='phone' name='phone' required />
   </div>
-  <div>
+  <div class="form-item subject">
     <label for='subject'>Subject:</label>
     <input type='text' id='subject' name='subject' required />
   </div>
-  <div>
+  <div class="form-item message">
     <label for='message'>Message:</label>
     <textarea id='message' name='message' required></textarea>
   </div>
-  <div>
-    <div class='form-errors my-4'></div>
+  <div class='errors my-4'>
+    <p class="form-errors text-sm text-red-700"></p>
+  </div>
 
     <button
       type='submit'
@@ -65,45 +66,54 @@
   .submit-btn:disabled {
     @apply opacity-50 cursor-default hover:shadow-none;
   }
+
+.error input {
+  @apply border-red-700
+}
+
+.error label {
+  @apply text-red-700
+}
 </style>
 
 <script>
   import { validateEmail } from '../../src/utils/validateEmail'
   import { validateInput } from '../../src/utils/validateInput'
   import { validateName } from '../../src/utils/validateName'
+  import { validatePhone } from '../utils/validatePhone'
 
-
-  const contactForm = document.querySelector('.contact-form') as HTMLFormElement
-
-  // let name = document.getElementById('name')
-  // let email = document.getElementById('email')
-  // let phone = document.getElementById('phone')
-  // let subject = document.getElementById('subject')
-  // let message = document.getElementById('message')
-
+  const contactForm = document.querySelector('#contact-form') as HTMLFormElement
   const submitBtn = document.querySelector('.submit-btn') as HTMLButtonElement
   const formErrors = document.querySelector('.form-errors') as HTMLDivElement
+  const formItems = document.querySelectorAll(
+    '.form-item'
+  ) as NodeListOf<HTMLDivElement>
 
-  contactForm.addEventListener('submit', e => {
+  let isValid: boolean
+  let errorsArray: string[] = []
+  let errorMessage: string[] = []
+
+ const setLoadingState = function(isLoading: boolean) {
+    if (isLoading) {
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Sending...'
+    } else {
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Submit'
+    }
+  }
+  
+
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault()
-
-    submitBtn.disabled = true
-    submitBtn.textContent = 'Sending...'
-
-    // let ffrmData = {
-    //   name: name.value,
-    //   email: email.value,
-    //   phone: phone.value,
-    //   subject: subject.value,
-    //   message: message.value,
-    // }
-
-
-    contactForm.addEventListener('submit', async function(event) {
-      event.preventDefault()
+    setLoadingState(true)
+    isValid = true
+    errorsArray = []
+    errorMessage = []
+  
 
     let formData = new FormData(this)
-
+    
     // Create an object to hold the trimmed data
     const data: { [key: string]: any } = {}
 
@@ -118,43 +128,83 @@
     const trimmedData = {
       name: data['name'],
       email: data['email'],
+      phone: data['phone'],
       subject: data['subject'],
       message: data['message'],
-    }
-
+    }    
 
     // Validate the form data
     if(!validateName(trimmedData.name)) {
-      formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid name</p>'
-      // submitBtn.disabled = false
-      // submitBtn.textContent = 'Submit'
+      // formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid name</p>'
+      isValid = false
+      errorsArray.push('name')
+      if (trimmedData.name === '') {
+        errorMessage.push('Name is required.')
+      } else {
+        errorMessage.push('Name must be at least 2 characters long.')
+      }
+    }
+
+    if(!validateEmail(trimmedData.email)) {
+      isValid = false
+      errorsArray.push('email')
+      if (trimmedData.email === '') {
+        errorMessage.push('Email is required.')
+      } else {
+        errorMessage.push('Email is not valid.')
+      }
+    }
+
+    if(!validatePhone(trimmedData.phone)) {
+      isValid = false
+      errorsArray.push('phone')
+      if (trimmedData.phone === '') {
+        errorMessage.push('Phone number is required.')
+      } else {
+        errorMessage.push('Phone number is invalid.')
+      }
+    }
+
+    if(!validateInput(trimmedData.subject)) {
+      isValid = false
+      errorsArray.push('subject')
+      if (trimmedData.subject === '') {
+        errorMessage.push('Subject is required.')
+      } else {
+        errorMessage.push('Subject must be at least 2 characters long.')
+      }
+    }
+
+    if(!validateInput(trimmedData.message)) {
+      isValid = false
+      errorsArray.push('message')
+      if (trimmedData.message === '') {
+        errorMessage.push('Message is required.')
+      } else {
+        errorMessage.push('Message must be at least 2 characters long.')
+      }
+    }
+
+    console.log(isValid, errorsArray, errorMessage);
+    
+    formItems.forEach(item => {
+      item.classList.remove('error')
+
+      errorsArray.map(error => {
+        if (item.classList.contains(error)) {
+          item.classList.add('error')
+        }
+      })
+    })
+
+    if (!isValid) {
+      formErrors.textContent = errorMessage.join('\n')
+      setLoadingState(false)
       return
     }
 
-      if(!validateEmail(trimmedData.email)) {
-        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid email</p>'
-        // submitBtn.disabled = false
-        // submitBtn.textContent = 'Submit'
-        return
-      }
 
-      if(!validateInput(trimmedData.subject)) {
-        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid subject</p>'
-        // submitBtn.disabled = false
-        // submitBtn.textContent = 'Submit'
-        return
-      }
-
-      if(!validateInput(trimmedData.message)) {
-        formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid message</p>'
-        // submitBtn.disabled = false
-        // submitBtn.textContent = 'Submit'
-        return
-      }
-
-
-      // send data to netlify function 
-
+    // send data to netlify function 
     const response = await fetch('/netlify/functions/contact-form', {
       method: 'POST',
       headers: {
@@ -163,20 +213,20 @@
       body: JSON.stringify(trimmedData),
     })
     const result = await response.json()
+    console.log(result);
 
     if (response.ok) {
-      // setLoadingState(false, 'success')
+      setLoadingState(false)
       contactForm.reset()
+      window.location.href = '/contact/success'
     } else {
-      // message.classList.add('error')
-      // message.textContent = result.message
-      // setLoadingState(false, 'error')
+      formErrors.textContent = result.message
+      setLoadingState(false)
     }
   })
 
 
-// ENND Of FUNCTion
-  })
+
     
 
   

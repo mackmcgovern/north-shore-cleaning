@@ -19,7 +19,7 @@ module.exports = {
         'accent-gold': '#d6c091',
         'accent-gold-md': '#C99752',
         'accent-blue': '#D4EAF4',
-        tan: '#F7F1E3',
+        'bg-tan': '#F7F1E3',
       },
     },
   },
