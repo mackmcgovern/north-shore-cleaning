@@ -2,32 +2,21 @@
 import { Image } from 'astro:assets'
 ---
 
-<div class="slider-wrapper pb-6">
-  <div class='slider-container'>
-    <div class='slider'></div>
-    <button class='slider-button prev-button'>&#8249;</button>
-    <button class='slider-button next-button'>&#8250;</button>
-  </div>
+<div class='slider-container'>
+  <div class='slider'></div>
+  <button class='slider-button prev-button'>&#8249;</button>
+  <button class='slider-button next-button'>&#8250;</button>
 </div>
 
 <style>
-  .slider-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
   .slider-container {
     position: relative;
     overflow: hidden;
-    max-width: 1000px;
-    margin: auto;
   }
 
   .slider {
     display: flex;
-    transition: transform 300ms ease-in;
+    transition: transform 1000ms ease-in;
   }
 
   .slider-button {
@@ -77,11 +66,37 @@ import { Image } from 'astro:assets'
 
   window.addEventListener('resize', function () {
     width = document.documentElement.clientWidth
-    createSlides()
+    createSlides(width)
   })
 
+  const desktopSlideData = [
+    {
+      title: 'Hospitality Cleaning',
+      image1: Cabin,
+      image2: Bed,
+    },
+    {
+      title: 'Commercial Cleaning',
+      image1: Clinic,
+      image2: Office,
+    },
+    { title: 'Commercial Cleaning', image1: HotelRoom, image2: Lobby },
+  ]
+  // const desktopSlideData = [
+  //   {
+  //     title: 'Hospitality Cleaning',
+  //     image1: Cabin,
+  //     image2: Bed,
+  //   },
+  //   {
+  //     title: 'Commercial Cleaning',
+  //     image1: Clinic,
+  //     image2: Office,
+  //   },
+  //   { title: 'Commercial Cleaning', image1: HotelRoom, image2: Lobby },
+  // ]
 
-  const slideData = [
+  const mobileSlideData = [
     { title: 'Hospitality Cleaning', image: Cabin },
     { title: 'Hospitality Cleaning', image: Bed },
     { title: 'Commercial Cleaning', image: Clinic },
@@ -91,9 +106,19 @@ import { Image } from 'astro:assets'
   ]
 
   // Clone first and last image
- slideData.push(slideData[0])
-slideData.unshift(slideData[slideData.length - 2])
+  desktopSlideData.push(desktopSlideData[0])
+  desktopSlideData.unshift(desktopSlideData[desktopSlideData.length - 2])
+  // Clone first and last mobile image
+  mobileSlideData.push(mobileSlideData[0])
+  mobileSlideData.unshift(mobileSlideData[mobileSlideData.length - 2])
 
+  let slideData
+
+  slideData = width >= 650 ? desktopSlideData : mobileSlideData
+
+  function getSlidesdata(width) {
+    slideData = width >= 650 ? desktopSlideData : mobileSlideData
+  }
 
   const slider = document.querySelector('.slider') as HTMLDivElement
   const sliderContainer = document.querySelector('.slider-container') as HTMLDivElement
@@ -109,14 +134,16 @@ slideData.unshift(slideData[slideData.length - 2])
 
   function moveHandler(direction) {
     isMoving = true
-    slider.style.transition = `transform 300ms ease`
+    slider.style.transition = `transform 500ms ease-in`
     direction !== 'right' ? (slideIndex -= 1) : (slideIndex += 1)
     moveSlides()
   }
 
-  function createSlides() {
+  function createSlides(width) {
+    getSlidesdata(width)
     let slides
-  {
+
+    if (width >= 650) {
       slides = slideData.map(
         slide =>
           `
@@ -131,7 +158,31 @@ slideData.unshift(slideData[slideData.length - 2])
         <div class='slider-images relative'>
           <div class='group'>
             <div class='flex'>
-              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.4]' />
+              <Image src=${slide.image1.src} alt='' class='image-1 w-1/2 bject-cover aspect-[4/2.5]' />
+              <Image src=${slide.image2.src} alt='' class='image-2 w-1/2 object-cover aspect-[4/2.5]' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+      )
+    } else {
+      slides = slideData.map(
+        slide =>
+          `
+    <div class='slide grow shrink-0 basis-full'>
+      <p
+        class='bg-teal-md py-4 text-white text-center tracking-widest text-lg service-title'>
+      ${slide.title}
+      </p>
+      <div class='relative'>
+        <div class='absolute top-0 left-0 w-full h-full bg-teal-md bg-opacity-20'>
+      </div>
+        <div class='slider-images relative'>
+          <div class='group'>
+            <div class='flex'>
+              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.5]' />
             </div>
           </div>
         </div>
@@ -173,40 +224,40 @@ slideData.unshift(slideData[slideData.length - 2])
     }
   })
 
-  createSlides()
+  createSlides(width)
 
   // Automate slider
-  // let timer
+  let timer
 
-  // function startSlider() {
-  //   timer = setInterval(() => {
-  //     moveHandler('right')
-  //   }, 4200) // Auto change every 4 seconds
-  // }
+  function startSlider() {
+    timer = setInterval(() => {
+      moveHandler('right')
+    }, 4200) // Auto change every 4 seconds
+  }
 
-  // function stopSlider() {
-  //   clearInterval(timer)
-  // }
+  function stopSlider() {
+    clearInterval(timer)
+  }
 
-  // startSlider()
+  startSlider()
 
-  // const sliderBtns = [nextBtn, prevBtn]
+  const sliderBtns = [nextBtn, prevBtn]
 
-  // sliderBtns.forEach(btn => btn.addEventListener('mouseenter', () => {
-  //   stopSlider()
-  // }))
+  sliderBtns.forEach(btn => btn.addEventListener('mouseenter', () => {
+    stopSlider()
+  }))
 
-  // sliderBtns.forEach(btn => btn.addEventListener('mouseleave', () => {
-  //   startSlider()
-  // }))
+  sliderBtns.forEach(btn => btn.addEventListener('mouseleave', () => {
+    startSlider()
+  }))
 
-  // document.addEventListener('visibilitychange', () => {
-  //   if (document.hidden) {
-  //     // Page is not visible, pause slider
-  //     stopSlider()
-  //   } else {
-  //     // Page is visible again, resume slider
-  //     startSlider()
-  //   }
-  // })
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      // Page is not visible, pause slider
+      stopSlider()
+    } else {
+      // Page is visible again, resume slider
+      startSlider()
+    }
+  })
 </script>

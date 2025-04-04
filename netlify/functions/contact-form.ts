@@ -19,6 +19,7 @@ const FormSchema = z.object({
   ),
   subject: z.string().nonempty({ message: 'Subject is required' }),
   message: z.string().nonempty({ message: 'Message is required' }),
+  honeypot: z.string().optional(),
 })
 
 type FormData = z.infer<typeof FormSchema>
@@ -34,12 +35,21 @@ const handler: Handler = async event => {
   let formData
   try {
     formData = JSON.parse(event.body as string)
-    console.log(`parsed form daata: ${formData}`)
   } catch (error) {
-    console.error('Error parsing JSON:', error)
     return {
       statusCode: 400,
       body: 'Invalid JSON',
+    }
+  }
+
+  // Honeypot check
+  if (formData.honeypot !== '') {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        success: false,
+        message: 'Spam detected please try again.',
+      }),
     }
   }
 

@@ -21,6 +21,10 @@
     <label for='subject'>Subject:</label>
     <input type='text' id='subject' name='subject' required />
   </div>
+  <div class='form-item' id='honeypot' aria-hidden='true'>
+    <label for='honey'>If you are a human, do not fill in this field.</label>
+    <input type='text' id='honey' name='honey' aria-hidden='true' />
+  </div>
   <div class='form-item message'>
     <label for='message'>Message:</label>
     <textarea id='message' name='message' required></textarea>
@@ -61,6 +65,10 @@
 
   .contact-form textarea {
     @apply h-[8rem];
+  }
+
+  #honeypot {
+    display: none;
   }
 
   .submit-btn:disabled {
@@ -123,11 +131,19 @@
       }
     })
 
+    // Check if the honeypot field is filled
+    if (data['honeypot'] !== '') {
+      formErrors.textContent = 'Spam detected. Please try again.'
+      setLoadingState(false)
+      return
+    }
+
     const trimmedData = {
       name: data['name'],
       email: data['email'],
       phone: data['phone'],
       subject: data['subject'],
+      honeypot: data['honeypot'],
       message: data['message'],
     }
 
