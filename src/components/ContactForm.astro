@@ -133,7 +133,7 @@
 
     // Check if the honeypot field is filled
     if (data['honeypot'] !== '') {
-      formErrors.textContent = 'Spam detected. Please try again. Fucking shit'
+      formErrors.textContent = 'Spam detected. Please try again.'
       console.log(data['honeypot'])
 
       setLoadingState(false)
