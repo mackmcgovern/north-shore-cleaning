@@ -8,7 +8,7 @@ import MobileNavbar from '../components/mobileNavbar.astro'
 const {
   title = 'North Shore Cleaning Services',
   showHeading = false,
-  description = 'We are proud to provide specialty cleaning services for Duluth, Superior & surrounding areas.',
+  description = 'We are proud to provide specialty cleaning services for Duluth, Minnesota and Superior, Wisconsin as well as the surrounding areas.',
   pageHeading,
 } = Astro.props
 ---
@@ -17,6 +17,7 @@ const {
   <head>
     <meta charset='utf-8' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='sitemap' href='/sitemap-index.xml' />
     <link rel='preconnect' href='https://fonts.googleapis.com' />
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
     <link
@@ -25,7 +26,14 @@ const {
     />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>{title}</title>
+    <meta name='description' content={description} />
+    <title>
+      {
+        title === 'North Shore Cleaning Services'
+          ? title
+          : `${title} | North Shore Cleaning Services`
+      }
+    </title>
   </head>
   <body>
     <div class='hidden sm:block'>
