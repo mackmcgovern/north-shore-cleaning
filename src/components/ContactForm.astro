@@ -22,8 +22,8 @@
     <input type='text' id='subject' name='subject' required />
   </div>
   <div class='form-item' id='honeypot' aria-hidden='true'>
-    <label for='honey'>If you are a human, do not fill in this field.</label>
-    <input type='text' id='honey' name='honey' aria-hidden='true' />
+    <label for='honeypot'>If you are a human, do not fill in this field.</label>
+    <input type='text' id='honeypot' name='honeypot' aria-hidden='true' />
   </div>
   <div class='form-item message'>
     <label for='message'>Message:</label>
@@ -85,7 +85,6 @@
 </style>
 
 <script>
-  import { formDataToObject } from 'astro:actions'
   import { validateEmail } from '../../src/utils/validateEmail'
   import { validateInput } from '../../src/utils/validateInput'
   import { validateName } from '../../src/utils/validateName'
@@ -134,7 +133,9 @@
 
     // Check if the honeypot field is filled
     if (data['honeypot'] !== '') {
-      formErrors.textContent = 'Spam detected. Please try again.'
+      formErrors.textContent = 'Spam detected. Please try again. Fucking shit'
+      console.log(data['honeypot'])
+
       setLoadingState(false)
       contactForm.reset()
       return
