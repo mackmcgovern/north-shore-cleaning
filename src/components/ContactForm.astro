@@ -85,6 +85,7 @@
 </style>
 
 <script>
+  import { formDataToObject } from 'astro:actions'
   import { validateEmail } from '../../src/utils/validateEmail'
   import { validateInput } from '../../src/utils/validateInput'
   import { validateName } from '../../src/utils/validateName'
@@ -135,6 +136,7 @@
     if (data['honeypot'] !== '') {
       formErrors.textContent = 'Spam detected. Please try again.'
       setLoadingState(false)
+      contactForm.reset()
       return
     }
 
