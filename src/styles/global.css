@@ -48,6 +48,10 @@
     @apply py-4 px-10 uppercase tracking-[0.08em] shadow-sm hover:shadow-md  transition-all ease-in text-[0.8rem] font-[500];
   }
 
+  .btn-outline {
+    @apply border border-accent-gold text-accent-gold bg-transparent hover:bg-accent-gold hover:text-teal-md;
+  }
+
   .btn-light {
     @apply bg-accent-blue text-teal-main hover:bg-[#C6E3F0];
   }
