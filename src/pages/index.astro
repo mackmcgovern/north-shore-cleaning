@@ -15,10 +15,10 @@ import { Image } from 'astro:assets'
       class='absolute top-0 left-0 right-0 bottom-0 teal-overlay-dark flex items-center'>
       <div class='absolute top-0 left-0 right-0 bottom-0 container'>
         <div
-          class='flex flex-col md:flex-row justify-center items-start gap-y-11 gap-x-32 md:justify-between md:items-center translate-y-0 container max-w-6xl h-full mx-auto px-10 sm:px-4'>
+          class='flex flex-col md:flex-row justify-center items-start gap-y-11 gap-x-32 md:justify-between md:items-center translate-y-0 container max-w-6xl h-full mx-auto px-4'>
           <div>
             <h1
-              class='uppercase text-4xl sm:text-6xl leading-[loose] text-white mb-6 md:mb-4 drop-shadow-md font-[300]'>
+              class='uppercase text-5xl sm:text-6xl leading-[loose] text-white mb-6 md:mb-4 drop-shadow-md font-[300]'>
               Cleaning<br /><span class='text-accent-gold font-[400]'
                 >Done Right</span
               >
@@ -88,7 +88,7 @@ import { Image } from 'astro:assets'
     </div>
   </section>
   <!-- VIEW OUR WORK  -->
-  <section class='py-6 bg-[#f2f2f2]'>
+  <section class='pb-0 sm:pb-6 pt-6 bg-[#f2f2f2]'>
     <h2 class='text-teal-md text-center text-2xl sm:text-3xl py-6 font-[300]'>
       View Our Work
     </h2>
@@ -101,8 +101,8 @@ import { Image } from 'astro:assets'
     class='flex flex-col gap-4 md:gap-6 justify-center items-center py-14 md:py-16'>
     <Icon name='stars' class='w-40 md:w-48' />
     <p
-      class='text-center font-[600] text-teal-md text-lg md:text-xl tracking-wider px-4 mt-2 md:mt-0'>
-      Five star cleanliness rating on Airbnb and Vrbo!
+      class='text-center font-[600] text-teal-md md:text-xl tracking-wider px-4 mt-2 md:mt-0'>
+      Five star cleanliness rating <br class='sm:hidden' /> on Airbnb and Vrbo!
     </p>
   </section>
 </MainLayout>
