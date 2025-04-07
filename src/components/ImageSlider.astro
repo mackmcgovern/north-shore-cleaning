@@ -22,6 +22,7 @@ import { Image } from 'astro:assets'
     position: relative;
     overflow: hidden;
     max-width: 1000px;
+    width: 95%;
     margin: auto;
   }
 
@@ -134,7 +135,7 @@ import { Image } from 'astro:assets'
         slide =>
           `
     <div class='slide grow shrink-0 basis-full'>
-        <div class='slider-images relative w-[95%] mx-auto'>
+        <div class='slider-images relative w-full mx-auto'>
           <div class='group'>
             <div class='flex'>
               <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' />
