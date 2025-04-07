@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon'
 import Logo from './Logo.astro'
 
-const currentPath = new URL(Astro.request.url).pathname.slice(1)
+const currentPath = new URL(Astro.request.url).pathname
 ---
 
 <div
@@ -31,15 +31,17 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
     <li>
       <a
         href='/services'
-        class={currentPath === 'services' ? 'nav-link active' : 'nav-link'}
-        >Services</a
+        class={currentPath.includes('/services')
+          ? 'nav-link active'
+          : 'nav-link'}>Services</a
       >
     </li>
     <li>
       <a
         href='/contact'
-        class={currentPath === 'contact' ? 'nav-link active' : 'nav-link'}
-        >Contact</a
+        class={currentPath.includes('/contact')
+          ? 'nav-link active'
+          : 'nav-link'}>Contact</a
       >
     </li>
   </ul>
