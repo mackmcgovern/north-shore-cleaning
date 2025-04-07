@@ -74,7 +74,7 @@
 
   @media all and (max-width: 640px) {
     .btn {
-      @apply py-3 px-6 text-[0.7rem];
+      @apply py-3 px-6;
     }
   }
 }

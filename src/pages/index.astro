@@ -8,7 +8,7 @@ import { Image } from 'astro:assets'
 
 <MainLayout>
   <section
-    class='relative mt-[100px] sm:mt-0 h-[60vh] sm-h-[100vh] min-h-[500px] text-center md:text-left'>
+    class='relative mt-[100px] sm:mt-0 h-[60vh] sm:h-[88vh] min-h-[500px] text-center md:text-left'>
     <div
       class='absolute bg-teal-main top-0 left-0 right-0 bottom-0 overlay-shape'>
     </div>
@@ -19,7 +19,7 @@ import { Image } from 'astro:assets'
           class='flex flex-col md:flex-row justify-center items-center gap-y-12 md:gap-y-11 gap-x-32 md:justify-between md:items-center translate-y-0 container max-w-6xl h-full mx-auto px-4'>
           <div>
             <h1
-              class='uppercase text-[2.6rem] md:text-6xl leading-[1] text-white mb-6 md:mb-4 drop-shadow-md font-[400] sm:font-[300]'>
+              class='uppercase text-[2.7rem] md:text-6xl leading-[1] text-white mb-6 md:mb-4 drop-shadow-md font-[400] sm:font-[300]'>
               Cleaning<br /><span class='text-accent-gold font-[400]'
                 >Done Right</span
               >
@@ -37,14 +37,16 @@ import { Image } from 'astro:assets'
     </div>
     <Image
       src={heroImg}
-      alt=''
+      alt='living room with dining table, chairs, and a couch'
       format='avif'
       quality={'mid'}
       class='object-cover h-full w-full'
+      widths={[540, 800, 1600, heroImg.width]}
+      sizes='(max-width: 540px) 540px,(max-width: 800px) 800px, (max-width: 1600px) 1600px, 100vw'
     />
   </section>
   <!-- Services Section  -->
-  <section class='py-14 flex flex-col items-center container'>
+  <section class='py-12 sm:py-14 flex flex-col items-center container'>
     <h2 class='text-teal-main text-3xl sm:text-[2.3rem] font-[300]'>
       Services
     </h2>
@@ -68,12 +70,12 @@ import { Image } from 'astro:assets'
     <a href='/services' class='btn btn-light'>Learn More</a>
   </section>
   <!-- ABOUT  -->
-  <section class='py-14 bg-teal-main bg-opacity-90'>
-    <h2 class='text-white text-3xl sm:text-[2.3rem] font-[200] text-center'>
+  <section class='py-11 sm:py-14 bg-teal-main bg-opacity-90'>
+    <h2 class='text-white text-3xl sm:text-[2.3rem] font-[300] text-center'>
       About Us
     </h2>
-    <div class='w-[90%] max-w-[57rem] py-6 sm:py-6 container'>
-      <p class='text-white text-center font-[300]'>
+    <div class='w-[90%] max-w-[57rem] py-4 sm:py-6 container'>
+      <p class='text-white text-center font-[300] text-balance'>
         April Schultz is the owner and President of North Shore Cleaning
         Services, Inc. She got her start in the cleaning industry when she was
         17 years old, working as a housekeeper for the historic Lutsen Lodge
