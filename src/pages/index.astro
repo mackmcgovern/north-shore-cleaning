@@ -7,7 +7,8 @@ import { Image } from 'astro:assets'
 ---
 
 <MainLayout>
-  <section class='relative mt-[100px] sm:mt-0'>
+  <section
+    class='relative mt-[100px] sm:mt-0 h-[70vh] sm-h-[100vh] min-h-[500px]'>
     <div
       class='absolute bg-teal-main top-0 left-0 right-0 bottom-0 overlay-shape'>
     </div>
@@ -18,7 +19,7 @@ import { Image } from 'astro:assets'
           class='flex flex-col md:flex-row justify-center items-start gap-y-11 gap-x-32 md:justify-between md:items-center translate-y-0 container max-w-6xl h-full mx-auto px-4'>
           <div>
             <h1
-              class='uppercase text-5xl sm:text-6xl leading-[loose] text-white mb-6 md:mb-4 drop-shadow-md font-[300]'>
+              class='uppercase text-[2.6rem] sm:text-6xl leading-[1] text-white mb-6 md:mb-4 drop-shadow-md font-[300]'>
               Cleaning<br /><span class='text-accent-gold font-[400]'
                 >Done Right</span
               >
@@ -41,7 +42,7 @@ import { Image } from 'astro:assets'
       alt=''
       format='avif'
       quality={'mid'}
-      class='object-cover h-[88vh] w-full'
+      class='object-cover h-full w-full'
     />
   </section>
   <!-- Services Section  -->

@@ -69,7 +69,7 @@
   }
 
   div.main-layout {
-    @apply px-2 md:px-4 mt-8 sm:mt-14 mb-24 max-w-5xl;
+    @apply px-2 md:px-4 mt-8 sm:mt-14 mb-5 sm:mb-24 max-w-5xl;
   }
 
   @media all and (max-width: 640px) {
