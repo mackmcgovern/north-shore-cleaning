@@ -7,7 +7,7 @@ import { Image } from 'astro:assets'
 ---
 
 <MainLayout>
-  <section class='relative mt-[100px] md:mt-0'>
+  <section class='relative mt-[100px] sm:mt-0'>
     <div
       class='absolute bg-teal-main top-0 left-0 right-0 bottom-0 overlay-shape'>
     </div>
@@ -18,13 +18,13 @@ import { Image } from 'astro:assets'
           class='flex flex-col md:flex-row justify-center items-start gap-y-11 gap-x-32 md:justify-between md:items-center translate-y-0 container max-w-6xl h-full mx-auto px-10 sm:px-4'>
           <div>
             <h1
-              class='uppercase text-5xl sm:text-6xl leading-[loose] text-white mb-4 drop-shadow-md font-[300]'>
+              class='uppercase text-4xl sm:text-6xl leading-[loose] text-white mb-6 md:mb-4 drop-shadow-md font-[300]'>
               Cleaning<br /><span class='text-accent-gold font-[400]'
                 >Done Right</span
               >
             </h1>
             <p
-              class='text-white tracking-wider text-lg max-w-[350px] sm:max-w-lg font-[300] drop-shadow-sm'>
+              class='text-white tracking-wider md:text-lg max-w-[350px] sm:max-w-lg font-[300] drop-shadow-sm'>
               Our team of experienced cleaners specializes in high-volume and
               fast-paced environments, ensuring a five-star quality clean every
               time.
@@ -46,7 +46,9 @@ import { Image } from 'astro:assets'
   </section>
   <!-- Services Section  -->
   <section class='py-14 flex flex-col items-center container'>
-    <h2 class='text-teal-main text-[2.3rem] font-[300]'>Services</h2>
+    <h2 class='text-teal-main text-3xl sm:text-[2.3rem] font-[300]'>
+      Services
+    </h2>
     <div
       class='flex flex-col sm:flex-row gap-y-12 justify-between items-center w-[90%] max-w-4xl services py-16 sm:py-24'>
       <div>
@@ -68,9 +70,11 @@ import { Image } from 'astro:assets'
   </section>
   <!-- ABOUT  -->
   <section class='py-14 bg-teal-main bg-opacity-90'>
-    <h2 class='text-white text-[2.3rem] font-[200] text-center'>About Us</h2>
+    <h2 class='text-white text-3xl sm:text-[2.3rem] font-[200] text-center'>
+      About Us
+    </h2>
     <div class='w-[90%] max-w-[57rem] py-6 sm:py-6 container'>
-      <p class='text-white sm:text-center leading-8 font-[300]'>
+      <p class='text-white sm:text-center font-[300]'>
         April Schultz is the owner and President of North Shore Cleaning
         Services, Inc. She got her start in the cleaning industry when she was
         17 years old, working as a housekeeper for the historic Lutsen Lodge
@@ -85,10 +89,10 @@ import { Image } from 'astro:assets'
   </section>
   <!-- VIEW OUR WORK  -->
   <section class='py-6 bg-[#f2f2f2]'>
-    <h2 class='text-teal-md text-center text-3xl py-6 font-[300]'>
+    <h2 class='text-teal-md text-center text-2xl sm:text-3xl py-6 font-[300]'>
       View Our Work
     </h2>
-    <div>
+    <div class='container'>
       <ImageSlider />
     </div>
   </section>
@@ -97,7 +101,7 @@ import { Image } from 'astro:assets'
     class='flex flex-col gap-4 md:gap-6 justify-center items-center py-14 md:py-16'>
     <Icon name='stars' class='w-40 md:w-48' />
     <p
-      class='text-center font-[600] text-teal-md text-lg md:text-xl tracking-wider px-4'>
+      class='text-center font-[600] text-teal-md text-lg md:text-xl tracking-wider px-4 mt-2 md:mt-0'>
       Five star cleanliness rating on Airbnb and Vrbo!
     </p>
   </section>
@@ -120,9 +124,17 @@ import { Image } from 'astro:assets'
     @apply text-lg font-[500] text-accent-gold text-center leading-tight uppercase;
   }
 
-  @media screen and (width <= 650px) {
+  @media screen and (width <= 640px) {
     .overlay-shape {
       clip-path: polygon(0 0, 0 68%, 72% 0);
+    }
+
+    .services svg {
+      @apply w-[60px];
+    }
+
+    .services p {
+      @apply text-[1rem];
     }
   }
 </style>

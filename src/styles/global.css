@@ -71,4 +71,10 @@
   div.main-layout {
     @apply px-2 md:px-4 mt-8 sm:mt-14 mb-24 max-w-5xl;
   }
+
+  @media all and (max-width: 640px) {
+    .btn {
+      @apply py-3 px-6 text-[0.7rem];
+    }
+  }
 }

@@ -39,23 +39,9 @@ const currentPath = new URL(Astro.request.url).pathname.slice(1)
     </li>
     <li>
       <a
-        href='/about'
-        class={currentPath === 'about' ? 'nav-link active' : 'nav-link'}
-        >About</a
-      >
-    </li>
-    <li>
-      <a
         href='/contact'
         class={currentPath === 'contact' ? 'nav-link active' : 'nav-link'}
         >Contact</a
-      >
-    </li>
-    <li>
-      <a
-        href='/apply'
-        class={currentPath === 'apply' ? 'nav-link active' : 'nav-link'}
-        >Apply</a
       >
     </li>
   </ul>

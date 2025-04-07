@@ -5,8 +5,8 @@ import { Image } from 'astro:assets'
 <div class='slider-wrapper pb-6'>
   <div class='slider-container'>
     <div class='slider'></div>
-    <button class='slider-button prev-button'>&#8249;</button>
-    <button class='slider-button next-button'>&#8250;</button>
+    <button class='slider-button prev-button'><span>&#8249;</span></button>
+    <button class='slider-button next-button'><span>&#8250;</span></button>
   </div>
 </div>
 
@@ -32,8 +32,7 @@ import { Image } from 'astro:assets'
 
   .slider-button {
     position: absolute;
-    top: 50%;
-    transform: translateY(calc(50% - 15px));
+    top: 47%;
     width: 40px;
     height: 40px;
     background-color: #333333;
@@ -44,6 +43,13 @@ import { Image } from 'astro:assets'
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slider-button span {
+    font-size: 26px;
   }
 
   .slider-button:hover {
@@ -56,6 +62,19 @@ import { Image } from 'astro:assets'
 
   .next-button {
     right: 20px;
+  }
+
+  @media all and (max-width: 640px) {
+    .slider-button {
+      top: 40%;
+      width: 30px;
+      height: 30px;
+      transform: translateY(0);
+    }
+
+    .slider-button span {
+      font-size: 20px;
+    }
   }
 </style>
 
@@ -115,19 +134,16 @@ import { Image } from 'astro:assets'
         slide =>
           `
     <div class='slide grow shrink-0 basis-full'>
-      <p
-        class='bg-teal-md py-4 text-white text-center tracking-widest text-lg service-title'>
-      ${slide.title}
-      </p>
-      <div class='relative'>
-        <div class='absolute top-0 left-0 w-full h-full bg-teal-md bg-opacity-20'>
-      </div>
-        <div class='slider-images relative'>
+        <div class='slider-images relative w-[95%] mx-auto'>
           <div class='group'>
             <div class='flex'>
-              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.4]' />
+              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' />
             </div>
           </div>
+              <p
+               class='sm:bg-teal-md sm:bg-opacity-85 py-2 text-teal-main sm:text-white text-center tracking-widest service-title  sm:absolute top-0 left-0 right-0 z-10'>
+                ${slide.title}
+             </p>
         </div>
       </div>
     </div>
