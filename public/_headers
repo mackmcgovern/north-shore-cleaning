@@ -1,0 +1,7 @@
+# Cache HTML files for 1 month
+/*
+  Cache-Control: public, max-age=3600, s-maxage=2592000, must-revalidate
+
+# Cache static assets for 1 year
+/*.(jpg|jpeg|png|webp|gif|svg|avif)
+  Cache-Control: public, max-age=31536000, immutable
