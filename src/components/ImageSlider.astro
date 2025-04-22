@@ -104,11 +104,27 @@ import { Image } from 'astro:assets'
   })
 
   const slideData = [
-    { title: 'Hospitality Cleaning', image: Cabin },
-    { title: 'Hospitality Cleaning', image: Bed },
-    { title: 'Commercial Cleaning', image: Clinic },
-    { title: 'Commercial Cleaning', image: Office },
-    { title: 'Commercial Cleaning', image: Lobby },
+    {
+      title: 'Hospitality Cleaning',
+      image: Cabin,
+      alt: 'A cabin living room with a couch, coffee table, woodstove, and television',
+    },
+    {
+      title: 'Hospitality Cleaning',
+      image: Bed,
+      alt: 'A neatly made bed with a window overlooking the street outside',
+    },
+    { title: 'Commercial Cleaning', image: Clinic, alt: 'Bed at a clinic' },
+    {
+      title: 'Commercial Cleaning',
+      image: Office,
+      alt: 'Large table with chairs in a meeting room',
+    },
+    {
+      title: 'Commercial Cleaning',
+      image: Lobby,
+      alt: 'Chairs in a waiting room',
+    },
   ]
 
   // Clone first and last image
@@ -146,7 +162,7 @@ import { Image } from 'astro:assets'
         <div class='slider-images relative w-full mx-auto'>
           <div class='group'>
             <div class='flex'>
-              <Image src=${slide.image.src} alt='' class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' />
+              <img src=${slide.image.src} alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=lazy  />
             </div>
           </div>
               <p
