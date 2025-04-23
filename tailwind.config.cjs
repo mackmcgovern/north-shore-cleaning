@@ -6,10 +6,6 @@ module.exports = {
       center: true,
     },
     extend: {
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        heading: ['Jost', 'sans-serif'],
-      },
       colors: {
         'light-black': '#171717',
         'teal-main': '#345C72',
