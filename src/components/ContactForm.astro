@@ -2,8 +2,43 @@
 // component: ContactForm
 ---
 
-<form
-  class='contact-form px-4 py-12 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'
+<form class='contact-form py-8 id=' contact-form'>
+  <div class='form-item name'>
+    <label for='name'>Name:</label>
+    <input type='text' id='name' name='name' required />
+  </div>
+  <div class='form-item email'>
+    <label for='email'>Email:</label>
+    <input type='email' id='email' name='email' required />
+  </div>
+  <div class='form-item phone'>
+    <label for='phone'>Phone Number:</label>
+    <input type='tel' id='phone' name='phone' required />
+  </div>
+  <div class='form-item subject'>
+    <label for='subject'>Subject:</label>
+    <input type='text' id='subject' name='subject' required />
+  </div>
+  <div class='form-item' id='honeypot' aria-hidden='true'>
+    <label for='honeypot'>If you are a human, do not fill in this field.</label>
+    <input type='text' id='honeypot' name='honeypot' aria-hidden='true' />
+  </div>
+  <div class='form-item message'>
+    <label for='message'>Message:</label>
+    <textarea id='message' name='message' required></textarea>
+  </div>
+  <div class='errors'>
+    <p class='form-errors text-sm text-red-700 pl-[4px]'></p>
+  </div>
+
+  <button
+    type='submit'
+    class='btn btn-light bg-accent-blue self-center sm:mt-6 w-[15rem] text-center submit-btn'
+    >Submit</button
+  >
+</form>
+<!-- <form
+  class='contact-form px-4 py-8 sm:px-16 sm:py-16 border-4 border-opacity-20 shadow-sm border-teal-main bg-teal-main bg-opacity-5'
   id='contact-form'>
   <div class='form-item name'>
     <label for='name'>Name:</label>
@@ -29,8 +64,8 @@
     <label for='message'>Message:</label>
     <textarea id='message' name='message' required></textarea>
   </div>
-  <div class='errors my-4'>
-    <p class='form-errors text-sm text-red-700'></p>
+  <div class='errors'>
+    <p class='form-errors text-sm text-red-700 pl-[4px]'></p>
   </div>
 
   <button
@@ -38,11 +73,11 @@
     class='btn btn-light bg-accent-blue self-center sm:mt-6 w-[15rem] text-center submit-btn'
     >Submit</button
   >
-</form>
+</form> -->
 
 <style>
   .contact-form {
-    @apply flex flex-col gap-4 max-w-6xl w-full md:w-[90%] lg:w-[80%];
+    @apply flex flex-col gap-4 w-full;
   }
 
   .contact-form > div {
@@ -55,12 +90,12 @@
 
   .contact-form input,
   .contact-form textarea {
-    @apply border border-teal-main border-opacity-50 text-teal-main font-normal;
+    @apply border border-teal-main border-opacity-50 text-teal-main font-normal shadow-sm;
   }
 
   .contact-form input:focus,
   .contact-form textarea:focus {
-    @apply bg-accent-blue bg-opacity-30;
+    /* @apply bg-accent-blue bg-opacity-30; */
   }
 
   .contact-form textarea {
