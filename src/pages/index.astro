@@ -41,8 +41,9 @@ import { Image } from 'astro:assets'
       format='avif'
       quality={'mid'}
       class='object-cover h-full w-full'
-      widths={[540, 800, 1600, heroImg.width]}
-      sizes='(max-width: 540px) 540px,(max-width: 800px) 800px, (max-width: 1600px) 1600px, 100vw'
+      widths={[540, 800, 1600, 2000, heroImg.width]}
+      sizes='(max-width: 540px) 540px,(max-width: 800px) 800px, (max-width: 1600px) 1600px, (max-width: 2000px) 2000px, 100vw'
+      loading='eager'
     />
   </section>
   <!-- Services Section  -->
