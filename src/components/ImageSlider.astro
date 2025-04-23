@@ -90,11 +90,21 @@ import { Image } from 'astro:assets'
 <script>
   // hospitality
   import Cabin from '../assets/hospitality-cabin.jpg'
+  import CabinMd from '../assets/hospitality-cabin-md.jpg'
+  import CabinSm from '../assets/hospitality-cabin-sm.jpg'
   import Bed from '../assets/hospitality-bed.jpg'
+  import BedMd from '../assets/hospitality-bed-md.jpg'
+  import BedSm from '../assets/hospitality-bed-sm.jpg'
   // commercial
   import Clinic from '../assets/commercial-clinic.jpg'
+  import ClinicMd from '../assets/commercial-clinic-md.jpg'
+  import ClinicSm from '../assets/commercial-clinic-sm.jpg'
   import Lobby from '../assets/commercial-lobby.jpg'
+  import LobbyMd from '../assets/commercial-lobby-md.jpg'
+  import LobbySm from '../assets/commercial-lobby-sm.jpg'
   import Office from '../assets/commercial-office.jpg'
+  import OfficeMd from '../assets/commercial-office-md.jpg'
+  import OfficeSm from '../assets/commercial-office-sm.jpg'
 
   let width = document.documentElement.clientWidth
 
@@ -107,22 +117,36 @@ import { Image } from 'astro:assets'
     {
       title: 'Hospitality Cleaning',
       image: Cabin,
+      imageMd: CabinMd,
+      imageSm: CabinSm,
       alt: 'A cabin living room with a couch, coffee table, woodstove, and television',
     },
     {
       title: 'Hospitality Cleaning',
       image: Bed,
+      imageSm: BedSm,
+      imageMd: BedMd,
       alt: 'A neatly made bed with a window overlooking the street outside',
     },
-    { title: 'Commercial Cleaning', image: Clinic, alt: 'Bed at a clinic' },
+    {
+      title: 'Commercial Cleaning',
+      image: Clinic,
+      imageMd: ClinicMd,
+      imageSm: ClinicSm,
+      alt: 'Bed at a clinic',
+    },
     {
       title: 'Commercial Cleaning',
       image: Office,
+      imageMd: OfficeMd,
+      imageSm: OfficeSm,
       alt: 'Large table with chairs in a meeting room',
     },
     {
       title: 'Commercial Cleaning',
       image: Lobby,
+      imageMd: LobbyMd,
+      imageSm: LobbySm,
       alt: 'Chairs in a waiting room',
     },
   ]
@@ -162,7 +186,7 @@ import { Image } from 'astro:assets'
         <div class='slider-images relative w-full mx-auto'>
           <div class='group'>
             <div class='flex'>
-              <img src=${slide.image.src} alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=lazy  />
+              <img src=${slide.image.src} srcset='${slide.imageSm.src} 600w, ${slide.imageMd.src} 1000w, ${slide.image.src} 1500w' sizes='(max-width: 600px) 100vw, (max-width: 1000px) 100vw, 1500px'  alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=lazy  />
             </div>
           </div>
               <p
