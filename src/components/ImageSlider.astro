@@ -186,7 +186,7 @@ import { Image } from 'astro:assets'
         <div class='slider-images relative w-full mx-auto'>
           <div class='group'>
             <div class='flex'>
-              <img src=${slide.image.src} srcset='${slide.imageSm.src} 600w, ${slide.imageMd.src} 1000w, ${slide.image.src} 1500w' sizes='(max-width: 600px) 100vw, (max-width: 1000px) 100vw, 1500px'  alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=lazy  />
+              <img src=${slide.image.src} srcset='${slide.imageSm.src} 540w, ${slide.imageMd.src} 1000w, ${slide.image.src} 1400w' sizes='(max-width: 540px) 540px, (max-width: 1000px) 1000px, 1400px'  alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=eager  />
             </div>
           </div>
               <p

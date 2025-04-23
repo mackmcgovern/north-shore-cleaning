@@ -2,8 +2,8 @@
 import MainLayout from '../layouts/MainLayout.astro'
 import ImageSlider from '../components/ImageSlider.astro'
 import { Icon } from 'astro-icon'
-import heroImg from '../assets/hero-2.jpg'
-import { Image } from 'astro:assets'
+import heroImg from '../assets/hero.jpg'
+import { Picture } from 'astro:assets'
 ---
 
 <MainLayout>
@@ -35,13 +35,13 @@ import { Image } from 'astro:assets'
         </div>
       </div>
     </div>
-    <Image
+    <Picture
       src={heroImg}
       alt='living room with dining table, chairs, and a couch'
-      format='avif'
+      formats={['avif', 'webp', 'jpeg']}
       quality={'mid'}
       class='object-cover h-full w-full'
-      widths={[540, 800, 1600, 2000, heroImg.width]}
+      widths={[540, 800, 1600, 2000, 3000]}
       sizes='(max-width: 540px) 540px,(max-width: 800px) 800px, (max-width: 1600px) 1600px, (max-width: 2000px) 2000px, 100vw'
       loading='eager'
     />
@@ -62,7 +62,7 @@ import { Image } from 'astro:assets'
         <p>Commercial <br />Cleaning</p>
       </div>
     </div>
-    <a href='/services' class='btn btn-light'>Learn More</a>
+    <a href='/services' class='btn btn-light'>View Services</a>
   </section>
   <!-- ABOUT  -->
   <section class='py-11 sm:py-14 bg-teal-main bg-opacity-90'>

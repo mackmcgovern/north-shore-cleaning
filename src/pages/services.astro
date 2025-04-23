@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro'
-import { Image } from 'astro:assets'
+import { Picture } from 'astro:assets'
 
 // Assets
 import Bed from '../assets/hospitality-bed.jpg'
@@ -19,9 +19,11 @@ const desc =
     <div
       class='flex flex-col w-[100%] max-w-[1100px] mx-auto pt-0 pb-8 md:pt-10 md:pb-24 container px-2 md:px-4'>
       <div class='service-item'>
-        <Image
+        <Picture
           src={Bed}
           alt='A neatly made bed in a bedroom with a widnow overlooking the street outside.'
+          widths={[600, 1000]}
+          sizes='(max-width: 540px) 100vw, 1000px'
         />
         <div class='desc'>
           <h2>Hospitality Cleaning</h2>
@@ -36,11 +38,13 @@ const desc =
         </div>
       </div>
 
-      <div class='service-item'>
-        <Image
+      <div class='service-item second'>
+        <Picture
           src={Lobby}
           alt='Chairs in a waiting room'
-          class='order-1 lg:order-2'
+          formats={['avif', 'webp', 'jpeg']}
+          widths={[600, 1000]}
+          sizes='(max-width: 600px) 100vw, 1000px'
         />
         <div class='desc order-2 lg:order-1'>
           <h2>Commercial Cleaning</h2>
@@ -71,8 +75,17 @@ const desc =
   .service-item {
     @apply flex flex-col lg:flex-row gap-y-4 w-full py-4 lg:py-0 justify-between items-center mb-3 md:mb-0;
   }
+
+  picture {
+    @apply w-[95%] lg:w-1/2;
+  }
+
+  .second picture {
+    @apply order-1 lg:order-2;
+  }
+
   img {
-    @apply w-[95%] lg:w-1/2 aspect-[4/3] object-cover;
+    @apply aspect-[4/3] object-cover;
   }
 
   .desc {
