@@ -92,19 +92,39 @@ import { Image } from 'astro:assets'
   import Cabin from '../assets/hospitality-cabin.jpg'
   import CabinMd from '../assets/hospitality-cabin-md.jpg'
   import CabinSm from '../assets/hospitality-cabin-sm.jpg'
+  import CabinAvif from '../assets/hospitality-cabin.avif'
+  import CabinWebp from '../assets/hospitality-cabin.webp'
+  import CabinSmAvif from '../assets/hospitality-cabin-sm.avif'
+  import CabinSmWebp from '../assets/hospitality-cabin-sm.webp'
   import Bed from '../assets/hospitality-bed.jpg'
   import BedMd from '../assets/hospitality-bed-md.jpg'
   import BedSm from '../assets/hospitality-bed-sm.jpg'
+  import BedAvif from '../assets/hospitality-bed.avif'
+  import BedWebp from '../assets/hospitality-bed.webp'
+  import BedSmAvif from '../assets/hospitality-bed-sm.avif'
+  import BedSmWebp from '../assets/hospitality-bed-sm.webp'
   // commercial
   import Clinic from '../assets/commercial-clinic.jpg'
   import ClinicMd from '../assets/commercial-clinic-md.jpg'
   import ClinicSm from '../assets/commercial-clinic-sm.jpg'
+  import ClinicAvif from '../assets/commercial-clinic.avif'
+  import ClinicWebp from '../assets/commercial-clinic.webp'
+  import ClinicSmAvif from '../assets/commercial-clinic-sm.avif'
+  import ClinicSmWebp from '../assets/commercial-clinic-sm.webp'
   import Lobby from '../assets/commercial-lobby.jpg'
   import LobbyMd from '../assets/commercial-lobby-md.jpg'
   import LobbySm from '../assets/commercial-lobby-sm.jpg'
+  import LobbyAvif from '../assets/commercial-lobby.avif'
+  import LobbyWebp from '../assets/commercial-lobby.webp'
+  import LobbySmAvif from '../assets/commercial-lobby-sm.avif'
+  import LobbySmWebp from '../assets/commercial-lobby-sm.webp'
   import Office from '../assets/commercial-office.jpg'
   import OfficeMd from '../assets/commercial-office-md.jpg'
   import OfficeSm from '../assets/commercial-office-sm.jpg'
+  import OfficeAvif from '../assets/commercial-office.avif'
+  import OfficeWebp from '../assets/commercial-office.webp'
+  import OfficeSmAvif from '../assets/commercial-office-sm.avif'
+  import OfficeSmWebp from '../assets/commercial-office-sm.webp'
 
   let width = document.documentElement.clientWidth
 
@@ -117,36 +137,56 @@ import { Image } from 'astro:assets'
     {
       title: 'Hospitality Cleaning',
       image: Cabin,
+      imageAvif: CabinAvif,
+      imageWebp: CabinWebp,
       imageMd: CabinMd,
       imageSm: CabinSm,
+      imageSmAvif: CabinSmAvif,
+      imageSmWebp: CabinSmWebp,
       alt: 'A cabin living room with a couch, coffee table, woodstove, and television',
     },
     {
       title: 'Hospitality Cleaning',
       image: Bed,
-      imageSm: BedSm,
+      imageAvif: BedAvif,
+      imageWebp: BedWebp,
       imageMd: BedMd,
+      imageSm: BedSm,
+      imageSmAvif: BedSmAvif,
+      imageSmWebp: BedSmWebp,
       alt: 'A neatly made bed with a window overlooking the street outside',
     },
     {
       title: 'Commercial Cleaning',
       image: Clinic,
+      imageAvif: ClinicAvif,
+      imageWebp: ClinicWebp,
       imageMd: ClinicMd,
       imageSm: ClinicSm,
+      imageSmAvif: ClinicSmAvif,
+      imageSmWebp: ClinicSmWebp,
       alt: 'Bed at a clinic',
     },
     {
       title: 'Commercial Cleaning',
       image: Office,
+      imageAvif: OfficeAvif,
+      imageWebp: OfficeWebp,
       imageMd: OfficeMd,
       imageSm: OfficeSm,
+      imageSmAvif: OfficeSmAvif,
+      imageSmWebp: OfficeSmWebp,
       alt: 'Large table with chairs in a meeting room',
     },
     {
       title: 'Commercial Cleaning',
       image: Lobby,
+      imageAvif: LobbyAvif,
+      imageWebp: LobbyWebp,
       imageMd: LobbyMd,
       imageSm: LobbySm,
+      imageSmAvif: LobbySmAvif,
+      imageSmWebp: LobbySmWebp,
       alt: 'Chairs in a waiting room',
     },
   ]
@@ -186,7 +226,30 @@ import { Image } from 'astro:assets'
         <div class='slider-images relative w-full mx-auto'>
           <div class='group'>
             <div class='flex'>
-              <img src=${slide.image.src} srcset='${slide.imageSm.src} 540w, ${slide.imageMd.src} 1000w, ${slide.image.src} 1400w' sizes='(max-width: 540px) 540px, (max-width: 1000px) 1000px, 1400px'  alt=${slide.alt} class='image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]' loading=eager  />
+              <picture>
+                <!-- AVIF format -->
+                <source 
+                  srcset="${slide.imageSmAvif.src} 540w, ${slide.imageAvif.src} 1400w"
+                  sizes="(max-width: 540px) 540px, 1400px"  
+                  type="image/avif" 
+                />
+                <!-- WebP format -->
+                <source 
+                  srcset="${slide.imageSmWebp.src} 540w, ${slide.imageWebp.src} 1400w" 
+                  sizes="(max-width: 540px) 540px, 1400px" 
+                  type="image/webp" 
+                />
+                <!-- Fallback to JPG -->
+                <img 
+                  src="${slide.imageSm.src} 540w, ${slide.image.src} 1400w" 
+                  sizes="(max-width: 540px) 540px, 1400px" 
+                  alt="${slide.alt}" 
+                  class="image-1 w-full object-cover aspect-[4/2.8] md:aspect-[4/2.5]" 
+                  loading="eager"
+                  width="1400"
+                  height="933"
+                />
+              </picture>
             </div>
           </div>
               <p
