@@ -43,11 +43,15 @@
 
   /* extra styles  */
   .btn {
-    @apply py-4 px-10 uppercase tracking-[0.08em] shadow-sm hover:shadow-md  transition-all ease-in text-[0.8rem] font-[500];
+    @apply py-[14px] px-9 uppercase tracking-[0.08em] shadow-sm transition-all ease-in text-[0.8rem] font-[500] rounded-sm;
   }
 
   .btn-outline {
     @apply border border-accent-gold text-accent-gold bg-transparent hover:bg-accent-gold hover:text-teal-md;
+  }
+
+  .btn-outline-dark {
+    @apply border border-teal-main text-teal-main bg-transparent hover:bg-teal-main hover:text-accent-gold;
   }
 
   .btn-light {
