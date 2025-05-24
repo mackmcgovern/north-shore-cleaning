@@ -1,6 +1,7 @@
 import type { Handler } from '@netlify/functions'
 import nodemailer from 'nodemailer'
 import { z } from 'zod'
+import sanitizeHtml from 'sanitize-html'
 
 const FormSchema = z.object({
   name: z
@@ -68,6 +69,13 @@ const handler: Handler = async event => {
 
   const { name, email, phone, subject, message } = result.data
 
+  // Sanitize all fields
+  const sanitizedName = sanitizeHtml(name)
+  const sanitizedEmail = sanitizeHtml(email)
+  const sanitizedPhone = sanitizeHtml(phone)
+  const sanitizedSubject = sanitizeHtml(subject)
+  const sanitizedMessage = sanitizeHtml(message)
+
   // Create a transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -84,7 +92,7 @@ const handler: Handler = async event => {
     from: process.env.USER_EMAIL,
     to: process.env.CONTACT_RECEIVE_EMAIL,
     replyTo: email,
-    subject: `New Contact Form Submission: ${subject}`,
+    subject: `New Contact Form Submission: ${sanitizedSubject}`,
     html: `
     <html>
       <body style="font-family: Helvetica, sans-serif; line-height: 1.6; color: #333">
@@ -93,23 +101,23 @@ const handler: Handler = async event => {
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd; min-width: 80px;"><strong>Name</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${name}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${sanitizedName}</td>
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd; min-width: 80px;"><strong>Email</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;"><a href="mailto:${email}">${email}</a></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><a href="mailto:${sanitizedEmail}">${sanitizedEmail}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd; min-width: 80px;"><strong>Phone Number</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;"><a href="tel:${phone}">${phone}</a></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><a href="tel:${sanitizedPhone}">${sanitizedPhone}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd; min-width: 80px;"><strong>Subject</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${subject}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${sanitizedSubject}</td>
           </tr>
           <tr>
             <td style="padding: 8px; border: 1px solid #ddd; min-width: 80px;"><strong>Message</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;">${message}</td>
+            <td style="padding: 8px; border: 1px solid #ddd;">${sanitizedMessage}</td>
           </tr>
         </table>
        

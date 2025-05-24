@@ -120,6 +120,7 @@
 </style>
 
 <script>
+  import DOMPurify from 'dompurify'
   import { validateEmail } from '../../src/utils/validateEmail'
   import { validateInput } from '../../src/utils/validateInput'
   import { validateName } from '../../src/utils/validateName'
@@ -174,61 +175,65 @@
       return
     }
 
-    const trimmedData = {
-      name: data['name'],
-      email: data['email'],
-      phone: data['phone'],
-      subject: data['subject'],
-      honeypot: data['honeypot'],
-      message: data['message'],
+    console.log(data, `DATA PRE Sanitize`)
+
+    const sanitizedData = {
+      name: DOMPurify.sanitize(data['name']),
+      email: DOMPurify.sanitize(data['email']),
+      phone: DOMPurify.sanitize(data['phone']),
+      subject: DOMPurify.sanitize(data['subject']),
+      honeypot: DOMPurify.sanitize(data['honeypot']),
+      message: DOMPurify.sanitize(data['message']),
     }
 
+    console.log(sanitizedData, `DATA POST Sanitize`)
+
     // Validate the form data
-    if (!validateName(trimmedData.name)) {
+    if (!validateName(sanitizedData.name)) {
       // formErrors.innerHTML = '<p class="text-sm text-red-600">Please enter a valid name</p>'
       isValid = false
       errorsArray.push('name')
-      if (trimmedData.name === '') {
+      if (sanitizedData.name === '') {
         errorMessage.push('Name is required.')
       } else {
         errorMessage.push('Name must be at least 2 characters long.')
       }
     }
 
-    if (!validateEmail(trimmedData.email)) {
+    if (!validateEmail(sanitizedData.email)) {
       isValid = false
       errorsArray.push('email')
-      if (trimmedData.email === '') {
+      if (sanitizedData.email === '') {
         errorMessage.push('Email is required.')
       } else {
         errorMessage.push('Email is not valid.')
       }
     }
 
-    if (!validatePhone(trimmedData.phone)) {
+    if (!validatePhone(sanitizedData.phone)) {
       isValid = false
       errorsArray.push('phone')
-      if (trimmedData.phone === '') {
+      if (sanitizedData.phone === '') {
         errorMessage.push('Phone number is required.')
       } else {
         errorMessage.push('Phone number is invalid.')
       }
     }
 
-    if (!validateInput(trimmedData.subject)) {
+    if (!validateInput(sanitizedData.subject)) {
       isValid = false
       errorsArray.push('subject')
-      if (trimmedData.subject === '') {
+      if (sanitizedData.subject === '') {
         errorMessage.push('Subject is required.')
       } else {
         errorMessage.push('Subject must be at least 2 characters long.')
       }
     }
 
-    if (!validateInput(trimmedData.message)) {
+    if (!validateInput(sanitizedData.message)) {
       isValid = false
       errorsArray.push('message')
-      if (trimmedData.message === '') {
+      if (sanitizedData.message === '') {
         errorMessage.push('Message is required.')
       } else {
         errorMessage.push('Message must be at least 2 characters long.')
@@ -259,7 +264,7 @@
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(trimmedData),
+      body: JSON.stringify(sanitizedData),
     })
     const result = await response.json()
     console.log(result)
