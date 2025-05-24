@@ -76,14 +76,6 @@ const handler: Handler = async event => {
   const sanitizedSubject = sanitizeHtml(subject)
   const sanitizedMessage = sanitizeHtml(message)
 
-  console.log('Sanitized form data:', {
-    sanitizedName,
-    sanitizedEmail,
-    sanitizedPhone,
-    sanitizedSubject,
-    sanitizedMessage,
-  })
-
   // Create a transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',

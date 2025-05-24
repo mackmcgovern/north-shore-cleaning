@@ -268,7 +268,7 @@
     if (response.ok) {
       setLoadingState(false)
       contactForm.reset()
-      // window.location.href = '/contact/success'
+      window.location.href = '/contact/success'
     } else {
       formErrors.textContent = result.message
       setLoadingState(false)
