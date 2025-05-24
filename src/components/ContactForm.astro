@@ -175,8 +175,6 @@
       return
     }
 
-    console.log(data, `DATA PRE Sanitize`)
-
     const sanitizedData = {
       name: DOMPurify.sanitize(data['name']),
       email: DOMPurify.sanitize(data['email']),
@@ -185,8 +183,6 @@
       honeypot: DOMPurify.sanitize(data['honeypot']),
       message: DOMPurify.sanitize(data['message']),
     }
-
-    console.log(sanitizedData, `DATA POST Sanitize`)
 
     // Validate the form data
     if (!validateName(sanitizedData.name)) {
@@ -240,7 +236,7 @@
       }
     }
 
-    console.log(isValid, errorsArray, errorMessage)
+    // console.log(isValid, errorsArray, errorMessage)
 
     formItems.forEach(item => {
       item.classList.remove('error')
@@ -267,12 +263,12 @@
       body: JSON.stringify(sanitizedData),
     })
     const result = await response.json()
-    console.log(result)
+    // console.log(result)
 
     if (response.ok) {
       setLoadingState(false)
       contactForm.reset()
-      window.location.href = '/contact/success'
+      // window.location.href = '/contact/success'
     } else {
       formErrors.textContent = result.message
       setLoadingState(false)
