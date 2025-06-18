@@ -37,7 +37,7 @@ import { Picture } from 'astro:assets'
     </div>
     <Picture
       src={heroImg}
-      alt='living room with dining table, chairs, and a couch'
+      alt='Clean and organized modern living space, representing North Shore Cleaning Services’ commitment to quality cleaning in Duluth, MN and Superior, WI.'
       formats={['avif', 'webp', 'jpg']}
       quality={'mid'}
       class='object-cover h-full w-full'
@@ -54,11 +54,17 @@ import { Picture } from 'astro:assets'
     <div
       class='flex flex-col sm:flex-row gap-y-12 justify-between items-center w-[60%] max-w-[380px] services py-16 sm:py-24'>
       <div>
-        <Icon name='house' />
+        <Icon
+          name='house'
+          alt='Icon of a clean house with sparkling stars, representing hospitality cleaning services'
+        />
         <p>Hospitality<br /> Cleaning</p>
       </div>
       <div>
-        <Icon name='cleaning' />
+        <Icon
+          name='cleaning'
+          alt='Icon of a mop and bucket, representing commercial cleaning services'
+        />
         <p>Commercial <br />Cleaning</p>
       </div>
     </div>
